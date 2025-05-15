@@ -28,53 +28,10 @@
     "datapathStructure": {
       "handshakingProtocol": [
         "Bundled-Data",
-        "Dual-Rail"
+        "2-phase"
       ],
       "pipelineStructure": "Data-Control-Decomposition"
     },
     "libraryName": "SPA"
-  },
-  "circuit": {
-    "type": null,
-    "signalProcessing": null,
-    "stateRetention": null,
-    "nonRatioed": false,
-    "hasClock": false,
-    "transistorCount": {
-      "nmos": null,
-      "pmos": null
-    },
-    "interface": {
-      "pgPins": [],
-      "handshakingPins": [],
-      "dataPins": []
-    }
-  },
-  "implementation": {
-    "netlist": "1000310_ACL.sp",
-    "testbenches": [
-      {
-        "id": "tb1",
-        "file": "1000310_ACL_tb1.sp",
-        "simulator": "HSPICE",
-        "type": "Transient",
-        "measurements": [
-          "Forward Delay",
-          "Backward Delay",
-          "Delay",
-          "Switching Energy"
-        ]
-      },
-      {
-        "id": "tb2",
-        "file": "1000310_ACL_tb2.sp",
-        "simulator": "HSPICE",
-        "type": "DC",
-        "measurements": [
-          "Leakage Power",
-          "Leakage Current"
-        ]
-      }
-    ]
   }
 }
