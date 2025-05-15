@@ -1,0 +1,80 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-05-14",
+    "repositoryIdentifier": {
+      "id": 2,
+      "doi": "10.1109/ASYNC.2002.1000310",
+      "category": "Asynchronoys Circuit Logic (ACL)"
+    }
+  },
+  "publication": {
+    "title": "SPA - a synthesisable Amulet core for smartcard applications",
+    "venue": "Proceedings Eighth International Symposium on Asynchronous Circuits and Systems",
+    "type": "conferences",
+    "year": "2002",
+    "authors": [
+      "L.A. Plana",
+      "P.A. Riocreux",
+      "W.J. Bainbridge",
+      "A. Bardsley",
+      "J.D. Garside",
+      "S. Temple"
+    ]
+  },
+  "techniques": {
+    "isAsynchronous": true,
+    "delayModel": "Self-Timed Micro-Pipeline",
+    "datapathStructure": {
+      "handshakingProtocol": [
+        "Bundled-Data",
+        "Dual-Rail"
+      ],
+      "pipelineStructure": "Data-Control-Decomposition"
+    },
+    "libraryName": "SPA"
+  },
+  "circuit": {
+    "type": null,
+    "signalProcessing": null,
+    "stateRetention": null,
+    "nonRatioed": false,
+    "hasClock": false,
+    "transistorCount": {
+      "nmos": null,
+      "pmos": null
+    },
+    "interface": {
+      "pgPins": [],
+      "handshakingPins": [],
+      "dataPins": []
+    }
+  },
+  "implementation": {
+    "netlist": "1000310_ACL.sp",
+    "testbenches": [
+      {
+        "id": "tb1",
+        "file": "1000310_ACL_tb1.sp",
+        "simulator": "HSPICE",
+        "type": "Transient",
+        "measurements": [
+          "Forward Delay",
+          "Backward Delay",
+          "Delay",
+          "Switching Energy"
+        ]
+      },
+      {
+        "id": "tb2",
+        "file": "1000310_ACL_tb2.sp",
+        "simulator": "HSPICE",
+        "type": "DC",
+        "measurements": [
+          "Leakage Power",
+          "Leakage Current"
+        ]
+      }
+    ]
+  }
+}
