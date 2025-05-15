@@ -1,4 +1,4 @@
-# Fruits Mining Dataset
+# Asynchronous Circuit Logic Dataset (ACLD)
 
 A collection of Asynchronous Circuit Logic sourced from multiple search engines, designed for computer-aided large-scale asynchronous circuit design.
 
