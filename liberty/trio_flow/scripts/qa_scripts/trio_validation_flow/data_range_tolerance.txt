@@ -1,0 +1,5 @@
+## type min max
+## min and max values are in library units 
+delay 0 10
+trans 0 10
+cap 0 10

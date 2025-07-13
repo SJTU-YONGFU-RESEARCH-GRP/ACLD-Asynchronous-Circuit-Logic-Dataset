@@ -1,0 +1,19 @@
+#!/bin/csh 
+
+###############################################################################
+#  DISCLAIMER: The following code is provided for Cadence customers to use at  #
+#   their own risk. The code may require modification to satisfy the           #
+#   requirements of any user. The code and any modifications to the code may   #
+#   not be compatible with current or future versions of Cadence products.     #
+#   THE CODE IS PROVIDED "AS IS" AND WITH NO WARRANTIES, INCLUDING WITHOUT     #
+#   LIMITATION ANY EXPRESS WARRANTIES OR IMPLIED WARRANTIES OF MERCHANTABILITY #
+#   OR FITNESS FOR A PARTICULAR USE.                                           #
+################################################################################
+
+# This a useful spectre wrap file when debugging non-SKI deck. Please change spectre version accrodingly.
+set args="$*"
+echo "ARGS == $args "
+
+perl -p -i -e 's/save=nooutput/save=all/g' sim.sp
+#/grid/cic/mmsimcm_v1/MMSIM151_ZA/ISR8/lnx86/tools.lnx86/bin/spectre $args
+/icd/flow/LIBERATE/LIBERATE192/19.21-s512_18/lnx86/tools.lnx86/spectre/bin/spectre $args

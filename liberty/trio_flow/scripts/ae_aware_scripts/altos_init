@@ -1,0 +1,404 @@
+#!/bin/sh
+# ~/altos_init
+# Cadence Design Systems Inc
+ALTOS_INIT_VERSION="1.0.0"
+ALTOS_INIT_UPDATE="2021/09/28"
+#
+# altos_init v1.0 or higher is recommended with 19.2.1x or higher releases
+# 
+# Copy this file to ~/altos_init to use.
+#################################################################
+
+# Set this to the -thread option used for char_library. Used for load-checking.
+ALTOS_THREAD=1
+
+# Only override this if using an updated version of the clean_sm.sh that is not shipped with the tool.
+PCLEAN=${ALTOSHOME}/bin/clean_sm.sh
+
+# Update to point to your Cadence license server
+export CDS_LIC_FILE="5280@sjdpc-lic1:5280@sjdpc-lic2:5280@sjdpc-lic3:5281@sjdpc-lic1:5281@sjdpc-lic2:5281@sjdpc-lic3"
+#if [-z "$CDS_BOLT_SERVER"] then
+#   echo "INFO:: CDS_BOLT_SERVER is set to $CDS_BOLT_SERVER ..."
+#else
+#   export CDS_BOLT_SERVER="dpc-liberate1"
+#fi
+#exit
+
+# Location of other executables. Should be installed by default on all systems capable of running Liberate.
+# Modify if necessary on your environment.
+# /bin
+ALTOS_BASENAME=/bin/basename
+ALTOS_CAT=/bin/cat
+ALTOS_DATE=/bin/date
+ALTOS_DF=/bin/df
+ALTOS_EGREP=/bin/egrep
+ALTOS_GREP=/bin/grep
+ALTOS_HOSTNAME=/bin/hostname
+ALTOS_LS=/bin/ls
+ALTOS_MKDIR=/bin/mkdir
+ALTOS_PWD=/bin/pwd
+ALTOS_PS=/bin/ps
+ALTOS_RM=/bin/rm
+ALTOS_SED=/bin/sed
+ALTOS_SORT=/bin/sort
+ALTOS_UNAME=/bin/uname
+#
+# /usr/bin
+ALTOS_AWK=/usr/bin/awk
+ALTOS_BC=/usr/bin/bc
+ALTOS_DIRNAME=/usr/bin/dirname
+ALTOS_FIND=/usr/bin/find
+ALTOS_FREE=/usr/bin/free
+ALTOS_HEAD=/usr/bin/head
+ALTOS_IPCS=/usr/bin/ipcs
+ALTOS_TAIL=/usr/bin/tail
+ALTOS_WC=/usr/bin/wc
+ALTOS_WHICH=/usr/bin/which
+ALTOS_WHOAMI=/usr/bin/whoami
+ALTOS_XARGS=/usr/bin/xargs
+
+# Get username
+export USER=$($ALTOS_WHOAMI)
+
+# TMPDIR settings
+# Recommended for best performance with stand-alone simulators
+export TMPDIR=/tmp/liberate_${USER}
+# Recommended only for AMS/MX partitioning.
+#unset TMPDIR
+#unset tmpdir
+
+COREFILESIZE=0
+
+################ DO NOT MODIFY BELOW THIS LINE #################################
+
+# Enable (1) or disable (0) Altos' queuing for Liberate products.
+export ALTOS_QUEUE=1
+
+# Enable (1) or disable (0) 64-bit mode.
+# Use 64-bit for Liberate+Spectre to ensure SKI works in Packet-Arc mode
+# Note that ALTOS_64 has been deprecated as of 16.1.0, but is included here for
+# altos_init compatibility with 15.1.X and prior releases
+export ALTOS_64=1
+export CDS_AUTO_64BIT="all"
+
+echo "############################################## Begin altos_init messages ##############################################"
+echo "*Info*      INIT_VERSION: Using altos_init version ${ALTOS_INIT_VERSION}, last updated on ${ALTOS_INIT_UPDATE}."
+echo "*Info*         TIMESTAMP: $($ALTOS_DATE)"
+echo "*Info*        PROCESS ID: $(echo $$)"
+echo "*Info*        ALTOS TOOL: Called from $0"
+
+exepath=$($ALTOS_DIRNAME $0)
+parentpath=$($ALTOS_DIRNAME $exepath)
+if [ ! $ALTOSHOME ]; then
+	export ALTOSHOME=$parentpath
+	echo "*WARN*         ALTOSHOME: Unset! Set to ${ALTOSHOME} in your environment prior to running LIBERATE tools."
+else
+	echo "*Info*         ALTOSHOME: ${ALTOSHOME}"
+fi
+echo "*Info*            PCLEAN: ${PCLEAN}"
+
+if [ ! -n "$ALTOS_QUEUE" ]; then export ALTOS_QUEUE=1 ; fi
+echo "*Info*       ALTOS_QUEUE: $ALTOS_QUEUE"
+
+if [ ! -n "$ALTOS_64" ]; then export ALTOS_64=1 ; fi
+echo "*Info*          ALTOS_64: $ALTOS_64"
+
+if [[ ( -z "$LM_LICENSE_FILE" ) || ( "$LM_LICENSE_FILE" == "" ) ]]
+then
+	echo "*Info*   LM_LICENSE_FILE is either empty or not initialized."
+else 
+	export LM_LICENSE_FILE
+	echo "*Info*   LM_LICENSE_FILE: $LM_LICENSE_FILE"
+fi
+
+# Licensing. CDS_LIC_FILE is recommended for all customers
+if [[ ( -z "$CDS_LIC_FILE" ) || ( "$CDS_LIC_FILE" == "" ) ]]
+then
+	echo "*WARN*      CDS_LIC_FILE: Either empty or not initialized. Use CDS_LIC_FILE for Cadence products."
+	unset CDS_LIC_ONLY
+else 
+	export CDS_LIC_FILE
+	echo "*Info*      CDS_LIC_FILE: $CDS_LIC_FILE"
+	if [ ! -n "$CDS_LIC_ONLY" ]; then export CDS_LIC_ONLY=1 ; fi
+	echo "*Info*      CDS_LIC_ONLY: $CDS_LIC_ONLY"
+	if [[ "$CDS_LIC_ONLY" == "0" ]]
+	then
+		echo "*WARN*      CDS_LIC_ONLY is set to 0. Set to 1 to speed-up license check-out."
+	fi
+fi
+
+# BOLT - CDS_BOLT_SERVER is recommended for all customers
+if [[ ( -z "$CDS_BOLT_SERVER" ) || ( "$CDS_BOLT_SERVER" == "" ) ]]
+then
+	echo "*WARN*   CDS_BOLT_SERVER: Either empty or not initialized. Use CDS_BOLT_SERVER for load-balancing with versions 19.2.x or higher."
+	unset CDS_BOLT_SERVER
+else 
+	export CDS_BOLT_SERVER
+	echo "*Info*   CDS_BOLT_SERVER: $CDS_BOLT_SERVER"
+fi
+
+if [[ ( -z "$CDS_AUTO_64BIT" ) || ( "$CDS_AUTO_64BIT" == "" ) ]]
+then
+	export CDS_AUTO_64BIT="all"
+	echo "*Info*    CDS_AUTO_64BIT: $CDS_AUTO_64BIT"
+elif [[ ( "$CDS_AUTO_64BIT" == "NONE" ) || ( "$CDS_AUTO_64BIT" == "none" ) ]]
+then
+	export CDS_AUTO_64BIT
+	echo "*Info*    CDS_AUTO_64BIT is set to '$CDS_AUTO_64BIT', but the recommended value is 'all' to enable Packet-Arc mode"
+else 
+	echo "*Info*    CDS_AUTO_64BIT: $CDS_AUTO_64BIT"
+fi
+
+# Check machine and OS
+echo "*Info*              HOST: $($ALTOS_UNAME -a)"
+echo "*Info*               CPU$($ALTOS_CAT /proc/cpuinfo | $ALTOS_GREP "model name" | $ALTOS_SORT -u | $ALTOS_SED "s#model name\t##g")"
+SUSE=0
+if [ -f /etc/redhat-release ]
+then
+	echo "*Info*                OS: $($ALTOS_CAT /etc/redhat-release)"
+elif [ -f /etc/os-release ]
+then
+	$ALTOS_CAT /etc/os-release | $ALTOS_SED "s/^/*Info*                OS: /g"
+	SUSE=1 
+elif [ -f /etc/SuSE-release ]
+then
+	$ALTOS_CAT /etc/SuSE-release | $ALTOS_SED "s/^/*Info*                OS: /g"
+	SUSE=1 
+else
+	echo "*WARN*                OS: Unknown - manually check for compatibility"
+fi
+
+# Check machine loading
+echo "*Info*          CPU LOAD: $($ALTOS_CAT /proc/loadavg)"
+CORES=$($ALTOS_CAT /proc/cpuinfo | $ALTOS_GREP processor | $ALTOS_WC -l)
+echo "*Info*         CPU CORES: $CORES" >&2
+LOAD=$($ALTOS_CAT /proc/loadavg | $ALTOS_AWK '{print $2}')
+echo "*Info*              LOAD: $LOAD" >&2
+if [ $(echo "(${LOAD}/1 + ${ALTOS_THREAD})" | $ALTOS_BC) -ge $CORES ]
+then
+	echo "*WARN*          CPU LOAD: $($ALTOS_HOSTNAME) has cores=$CORES and load=$LOAD. The host may be overloaded during this run." >&2
+	echo "*WARN*          CPU LOAD: If there are performance issues or failing jobs on this run, this may be the cause." >&2
+else
+	echo "*PASS*          CPU LOAD: $($ALTOS_HOSTNAME) has cores=$CORES and load=$LOAD."
+fi
+
+if [ "$($ALTOS_WHICH spectre 2>/dev/null)" != "" ]
+then
+	MMSIM_VERSION=$(spectre -W 2>&1)
+	if  [[ $(echo $MMSIM_VERSION | $ALTOS_GREP "WARNING" ) != "" ]]
+	then
+		echo $MMSIM_VERSION | #ALTOS_SED "s/^/*ERROR*     MMSIM_VERSION: /g"
+		echo "*ERROR*     MMSIM VERSION: $MMSIM_VERSION"
+	else
+		MMSIM_VERSION=$(spectre -W 2>&1 | $ALTOS_AWK '{print $2}')
+		echo "*Info*     MMSIM VERSION: $MMSIM_VERSION"
+		MMSIM_MAJ_VER=$(echo $MMSIM_VERSION | $ALTOS_SED "s/\./ /g" | $ALTOS_AWK '{print $1}')
+		MMSIM_ISR_VER=$(echo $MMSIM_VERSION | $ALTOS_SED "s/\./ /g" | $ALTOS_AWK '{print $NF}' | $ALTOS_SED "s/isr//g")
+		if [[ ( ${MMSIM_MAJ_VER} -lt 13 ) && ( ${MMSIM_ISR_VER} -lt 9 ) ]]
+		then
+			LIMIT=8192
+		else
+			LIMIT=1024
+		fi
+		# Check descriptor limit
+		DESCRIPTORS=$(ulimit -n)
+		if [ ${DESCRIPTORS} -lt $LIMIT ]
+		then
+			echo "*WARN*       DESCRIPTORS: ${DESCRIPTORS}"
+			echo "*WARN*       DESCRIPTORS: Recommended is 8192 if using release prior to MMSIM 12.1 ISR9 and an EMI flow."
+			echo "*WARN*       DESCRIPTORS: Use 'limit descriptors 8192' for CSH or 'ulimit -n 8192' for BASH."
+		else
+			echo "*Info*       DESCRIPTORS: ${DESCRIPTORS}"
+		fi
+	fi
+else
+	echo "*Info*     MMSIM VERSION: No MMSIM found in PATH. Spectre path must be set in extsim_cmd if needed."
+fi
+
+# Check machine memory status
+$ALTOS_FREE -g | $ALTOS_SED "s/^/*Info*            MEMORY: /g"
+#             total       used       free     shared    buffers     cached
+# Hard GB check
+MEM=($($ALTOS_FREE -g | $ALTOS_GREP "Mem" | $ALTOS_AWK '{print $2 " " $3 " " $4}'))
+TEST=$(echo "(${MEM[2]}) / 1" | $ALTOS_BC)
+if [ ${TEST} -le 2 ]
+then
+	echo "*WARN*            MEMORY: $($ALTOS_HOSTNAME) has less than 2GB of free memory. The host may be swapping during this run." >&2
+	echo "*WARN*            MEMORY: If there are performance issues or failing jobs on this run, this may be the cause." >&2
+else
+	echo "*PASS*            MEMORY: $($ALTOS_HOSTNAME) has ${MEM[2]}GB of free memory."
+fi
+
+# Percentage check
+TEST=$(echo "(100 *    ${MEM[2]} / ${MEM[0]})" | $ALTOS_BC)
+if [ $TEST -le 20 ]
+then
+	echo "*WARN*          MEMORY %: $($ALTOS_HOSTNAME) has ${TEST}% free memory. The host may run out of RAM during this run." >&2
+	echo "*WARN*          MEMORY %: If there are performance issues or failing jobs on this run, this may be the cause." >&2
+else
+	echo "*PASS*          MEMORY %: $($ALTOS_HOSTNAME) has ${TEST}% free memory ."
+fi
+
+# Check machine swap status
+SWAP=($($ALTOS_FREE -g | $ALTOS_GREP "Swap" | $ALTOS_AWK '{print $2 " " $3 " " $4}' | $ALTOS_SED "s#G##g" ))
+TEST=$(echo "(${SWAP[2]}) / 1" | $ALTOS_BC)
+if [ ${TEST} -lt 2 ]
+then
+	echo "*WARN*              SWAP: $($ALTOS_HOSTNAME) has less than 2GB of swap available. The host may be swapping during this run." >&2
+	echo "*WARN*              SWAP: If there are performance issues or failing jobs on this run, this may be the cause." >&2
+else
+	echo "*PASS*              SWAP: $($ALTOS_HOSTNAME) is using ${SWAP[1]}GB of SWAP."
+fi
+
+# Check machine RAMDISK status
+if [ $SUSE -eq 1 ]
+then
+	RAMDISK=($($ALTOS_DF -B G /dev | $ALTOS_GREP "/dev" | $ALTOS_AWK '{print $2 " " $3 " " $4}' | $ALTOS_SED "s#G##g" ))
+	$ALTOS_DF -B G /dev | $ALTOS_SED "s/^/*Info*           RAMDISK: /g"
+else
+	RAMDISK=($($ALTOS_DF -B G /dev/shm | $ALTOS_GREP "/dev/shm" | $ALTOS_AWK '{print $2 " " $3 " " $4}' | $ALTOS_SED "s#G##g" ))
+	$ALTOS_DF -B G /dev/shm | $ALTOS_SED "s/^/*Info*           RAMDISK: /g"
+fi
+TEST=$(echo "(${RAMDISK[2]}) / 1" | $ALTOS_BC)
+if [ ${TEST} -lt 2 ]
+then
+	echo "*WARN*           RAMDISK: $($ALTOS_HOSTNAME) has less than 2GB of RAMDISK available. Please report to IT for clean-up." >&2
+	echo "*WARN*           RAMDISK: If there are performance issues or failing jobs on this run, this may be the cause." >&2
+	RAMDISK=0
+else
+	echo "*PASS*           RAMDISK: $($ALTOS_HOSTNAME) is using <= ${RAMDISK[1]}GB of RAMDISK."
+	RAMDISK=1
+fi
+
+# Limit core file sizes
+echo "*Info*      COREFILESIZE: Setting largest corefilesize to $COREFILESIZE" >&2
+ulimit -c $COREFILESIZE
+
+# Check machine TMP status
+if [[ "$($ALTOS_DF -B G /tmp | $ALTOS_GREP "/tmp")" != "" ]]
+then
+	TMP=($($ALTOS_DF -B G /tmp | $ALTOS_GREP "/tmp" | $ALTOS_AWK '{print $(NF-4) " " $(NF-3) " " $(NF-2)}' | $ALTOS_SED "s#G##g" ))
+else
+	TMP=($($ALTOS_DF -B G /tmp | $ALTOS_HEAD -n 2 | $ALTOS_TAIL -n 1 | $ALTOS_AWK '{print $(NF-4) " " $(NF-3) " " $(NF-2)}' | $ALTOS_SED "s#G##g" ))
+fi
+TEST=$(echo "(${TMP[2]}) / 1" | $ALTOS_BC)
+if [[ ${TEST} -lt 2 ]]
+then
+	echo "*WARN*              /tmp: $($ALTOS_HOSTNAME) has < 2GB of /tmp available. Please report to IT for clean-up." >&2
+	echo "*WARN*              /tmp: If there are performance issues or failing jobs on this run, this may be the cause." >&2
+	TMP=0
+else
+	echo "*PASS*              /tmp: $($ALTOS_HOSTNAME) has ${TMP[2]}GB of /tmp available."
+	TMP=1
+fi
+
+ZOMBIES=$($ALTOS_PS uxwwfa | $ALTOS_EGREP "defunct" | $ALTOS_EGREP "liberate|spectre")
+echo "*Info* ================== ZOMBIE JOBS: start ==================*"
+echo "$ZOMBIES"
+echo "*Info* ================== ZOMBIE JOBS: end ==================*"
+
+PARENT=$($ALTOS_BASENAME $0)
+# Set the path to the directory used for temporary storage.
+M_CHECK1=$($ALTOS_PS -ww | $ALTOS_EGREP "liberate_mx|liberate_ams" | $ALTOS_WC -l)
+M_CHECK2=$($ALTOS_PS -ww | $ALTOS_GREP liberate | $ALTOS_GREP -v grep | $ALTOS_GREP "z true" )
+if [[ ($M_CHECK1 -ge 2) && (-z "$M_CHECK2") ]]
+then
+	# Running MX or AMS, skip changing TMPDIR
+	echo "*Info*            TMPDIR: Running Liberate AMS/MX partitioning. TMPDIR unchanged"
+elif [[ -n $TMPDIR ]]
+then
+	echo "*Info*            TMPDIR: Using $TMPDIR."
+	$ALTOS_MKDIR -p $TMPDIR 
+	export tmpdir=$TMPDIR
+else
+	# Not running AMS/MX and TMPDIR is unset. Set TMPDIR for best performance.
+	echo "*Info*            TMPDIR: Setting for best performance."
+	if [[ $RAMDISK -eq 1 ]]
+	then
+		export TMPDIR=/dev/shm/${USER}_real
+		export tmpdir=/dev/shm/${USER}_real
+	elif [[ $TMP -eq 1 ]]
+	then
+		export TMPDIR=/tmp/${USER}
+		export tmpdir=/tmp/${USER}
+	else
+		echo "*WARN*            TMPDIR: RAMDISK and TMP are unavailable. Using $($ALTOS_PWD)/${USER}."
+		export TMPDIR=$($ALTOS_PWD)/${USER}
+		export tmpdir=$($ALTOS_PWD)/${USER}
+		#unset TMPDIR
+		#unset tmpdir
+	fi
+	# Create the $TMPDIR
+	if [[ ! -d $TMPDIR ]]; then $ALTOS_MKDIR -p $TMPDIR ; fi
+	if [[ (! -d $TMPDIR) || (! -O $TMPDIR) || (! -x $TMPDIR) || (! -w $TMPDIR) || (! -r $TMPDIR) ]]
+	then
+		echo "*FAIL*          TMPDIR: $TMPDIR is unavailable. Finding alternate TMPDIR (there will be a performance penalty)." >&2
+		echo "*FAIL*          TMPDIR: This is a system error on $($ALTOS_HOSTNAME) and needs to be fixed by IT." >&2
+		echo "$($ALTOS_LS -ald $TMPDIR | $ALTOS_SED "s/^/*FAIL*          TMPDIR: /g")" >&2
+		export TMPDIR=/tmp/${USER}
+		export tmpdir=/tmp/${USER}
+		$ALTOS_MKDIR -p $TMPDIR 
+		if [[ (! -d $TMPDIR) || (! -O $TMPDIR) || (! -x $TMPDIR) || (! -w $TMPDIR) || (! -r $TMPDIR) ]]
+		then
+			echo "*FAIL*          TMPDIR: $TMPDIR is unavailable. Falling back to NFS storage for temporary files." >&2
+			echo "*FAIL*          TMPDIR: This is a system error on $($ALTOS_HOSTNAME) and needs to be fixed by IT." >&2
+			echo "$($ALTOS_LS -ald $TMPDIR | $ALTOS_SED "s/^/*FAIL*          TMPDIR: /g")" >&2
+			echo "*FAIL*          TMPDIR: Any failing SPICE jobs on $($ALTOS_HOSTNAME) are caused by this problem." >&2
+			# For now, just unset TMPDIR and tmpdir and continue
+			unset TMPDIR
+			unset tmpdir
+			# If this is the cause of many failures, then we should look at exiting and having SGE/ALTOS_LSF resubmit.
+			#exit 1
+		fi
+	else
+		echo "*Info*            TMPDIR: $TMPDIR"
+		echo "*Info*            tmpdir: $tmpdir"
+	fi
+fi
+
+# TMPDIR permissions check
+if [[ -n $TMPDIR ]]
+then
+	echo "$($ALTOS_LS -ald ${TMPDIR}/ | $ALTOS_SED "s/^/*Info*            TMPDIR: /g")" 
+	if [[ (-d $TMPDIR) && (-O $TMPDIR) && (-x $TMPDIR) && (-w $TMPDIR) && (-r $TMPDIR) ]]
+	then
+		echo "*PASS*            TMPDIR: ${TMPDIR} has appropriate permissions"
+	else
+		echo "*FAIL*            TMPDIR: ${TMPDIR} has unusable permissions please correct. This is a fatal error." >&2
+		exit 1
+	fi
+fi
+
+echo "##############################################  End altos_init messages  ##############################################"
+
+# Clean-up of local overrides
+# /bin
+unset ALTOS_BASENAME
+unset ALTOS_CAT
+unset ALTOS_DATE
+unset ALTOS_DF
+unset ALTOS_EGREP
+unset ALTOS_GREP
+unset ALTOS_HOSTNAME
+unset ALTOS_LS
+unset ALTOS_MKDIR
+unset ALTOS_PWD
+unset ALTOS_PS
+unset ALTOS_RM
+unset ALTOS_SED
+unset ALTOS_SORT
+unset ALTOS_UNAME
+# /usr/bin
+unset ALTOS_AWK
+unset ALTOS_BC
+unset ALTOS_DIRNAME
+unset ALTOS_FIND
+unset ALTOS_FREE
+unset ALTOS_HEAD
+unset ALTOS_IPCS
+unset ALTOS_TAIL
+unset ALTOS_WC
+unset ALTOS_WHICH
+unset ALTOS_WHOAMI
+unset ALTOS_XARGS
+

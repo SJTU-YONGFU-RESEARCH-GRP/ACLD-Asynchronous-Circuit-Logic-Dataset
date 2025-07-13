@@ -1,0 +1,46 @@
+.
+|-- README.txt
+|-- altos_init
+|-- compare
+|   |-- cmpSameFileAt2Loc.csh
+|   |-- compare_parallel.tcl
+|   `-- custom_comp.tcl
+|-- flow
+|   |-- genArcs.tcl
+|   |-- genCellMap.tcl
+|   |-- genCellTmpl.tcl
+|   |-- genCellUserData.tcl
+|   |-- genCellmap.csh
+|   |-- genFamilyTmpl.tcl
+|   |-- genFamilyUserData.tcl
+|   |-- genPintypeData.tcl
+|   |-- getUserData_for_MBFF.tcl
+|   `-- write_template.tcl
+|-- other
+|   |-- gtc.tcl
+|   |-- splitNetlist.pl
+|-- plot_outliers
+|   |-- gen_histPlot.csh
+|   |-- gnu_histogram.cmd
+|   |-- gnu_histogram.csh
+|   |-- histogram_multi.tcl
+|   `-- scatter_plot.csh
+|-- post_process_lib
+|   |-- add_isProp.tcl
+|   |-- fix_non_unate.tcl
+|   |-- genCcspOnlyLib.tcl
+|   `-- gen_scm_lvf.tcl
+|-- split_append_lib
+|   |-- appendLibsOverwrite.csh
+|   |-- append_libs.tcl
+|   |-- splitAllCellslib.csh
+|   |-- splitLibsInPerCellLib.tcl
+|   |-- splitLibsInSubsetLibs.tcl
+|   `-- split_cells.py
+`-- to_debug
+    |-- get_rise_fall_power.py
+    |-- get_rise_fall_power.tcl
+    |-- spectre_wrap
+    `-- splitCompressLog.pl
+
+7 directories, 38 files

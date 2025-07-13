@@ -1,0 +1,119 @@
+*
+*|DSPF 1.5
+*
+*|DATE "Mon Sep 12 06:34:14 2016"
+*|VENDOR "Cadence Design Systems"
+*|PROGRAM "Cadence Quantus QRC Extraction"
+*|VERSION "15.1.2 Linux 64 bit - (Mon Aug 24 18:22:18 PDT 2015)"
+*|DESIGN "INVX1"
+*|DIVIDER /
+*|DELIMITER #
+*|DeviceFingerDelim "@"
+*|BUSBIT []
+** caps2d version: 10
+*
+.SUBCKT  INVX1 VDD Y A VSS
+*
+*Net Section
+*
+*|GROUND_NET VSS
+*
+*|NET VDD 3.27901e-17
+*|P (VDD X 0 0.1000 1.7100)
+*|I (Mmp0#s Mmp0 s X 0 0.1745 1.0950)
+*|S (VDD#1 0.1100 1.4600)
+*|S (VDD#3 0.1100 1.5200)
+*|S (VDD#4 0.0000 1.7100)
+*|S (VDD#5 0.2000 1.7100)
+*|S (VDD#6 0.2000 1.7100)
+C1 VDD#6 VSS 8.213e-18
+C2 VDD#1 VSS 3.52245e-18
+C3 VDD VSS 2.10546e-17
+Rk1 VDD#1 VDD#3 0.039477 $metal1_conn  $L=0.05975 $W=0.1 $X=0.1095 $Y=1.49
+Rk2 VDD#3 VDD 0.151328 $metal1_conn  $L=0.19 $W=0.1 $X=0.11 $Y=1.6
+Rk3 VDD VDD#4 0.050340 $metal1_conn  $L=0.10025 $W=0.125 $X=0.04 $Y=1.71
+Rk4 VDD VDD#6 0.050034 $metal1_conn  $L=0.2995 $W=0.125 $X=0.14 $Y=1.71
+Rz5 VDD#5 VDD#6 37.500000 $cont_ndiff  $A=0.0072 $N=2 $X=0.2 $Y=1.71
+Ry6 Mmp0#s VDD#3 62.000000 $cont_pdiff  $L=0.06 $W=0.06 $N=1 $A=0.0036 $X=0.11 $Y=1.52
+*
+*|NET Y 7.02378e-17
+*|P (Y X 0 0.2900 0.7600)
+*|I (Mmn0#d Mmn0 d X 0 0.2205 0.5000)
+*|I (Mmp0#d Mmp0 d X 0 0.2205 1.0950)
+*|S (Y#1 0.3000 1.2895)
+*|S (Y#3 0.3000 1.0950)
+*|S (Y#4 0.2900 0.7995)
+*|S (Y#5 0.2900 0.6800)
+*|S (Y#7 0.3000 0.5025)
+*|S (Y#8 0.3000 0.3700)
+C4 Y#7 VSS 1.57868e-17
+C5 Y#5 VSS 1.24459e-17
+C6 Y#4 VSS 8.62976e-18
+C7 Y#3 VSS 1.48702e-17
+C8 Y#8 VSS 6.3917e-18
+C9 Y VSS 1.21134e-17
+Rk7 Y#1 Y#3 0.127971 $metal1_conn  $L=0.19525 $W=0.1 $X=0.2995 $Y=1.26
+Rk8 Y#3 Y#4 0.194244 $metal1_conn  $L=0.295 $W=0.1 $X=0.3 $Y=0.865
+Rk9 Y#4 Y 0.030180 $metal1_conn  $L=0.0395 $W=0.09 $X=0.29 $Y=0.78
+Rk10 Y Y#5 0.052821 $metal1_conn  $L=0.0795 $W=0.09 $X=0.29 $Y=0.7195
+Rk11 Y#5 Y#7 0.123515 $metal1_conn  $L=0.1775 $W=0.09 $X=0.3 $Y=0.64
+Rk12 Y#7 Y#8 0.087178 $metal1_conn  $L=0.13225 $W=0.09 $X=0.2995 $Y=0.405
+Rz13 Mmn0#d Y#7 37.500000 $cont_ndiff  $A=0.0072 $N=2 $X=0.3 $Y=0.5025
+Ry14 Mmp0#d Y#3 20.666666 $cont_pdiff  $A=0.0108 $N=3 $X=0.3 $Y=1.095
+*
+*|NET A 1.24865e-16
+*|P (A X 0 0.0900 0.7600)
+*|I (Mmn0#g Mmn0 g X 0 0.1975 0.5000)
+*|I (Mmp0#g Mmp0 g X 0 0.1975 1.0950)
+*|S (A#1 0.1975 1.4095)
+*|S (A#3 0.1975 0.7300)
+*|S (A#4 0.1300 0.7300)
+*|S (A#6 0.1975 0.2500)
+*|S (A#7 0.0700 0.7300)
+*|S (A#8 0.1300 0.7300)
+C10 Mmp0#g VSS 2.77643e-17
+C11 Mmn0#g VSS 5.86213e-18
+C12 A#8 VSS 3.981e-17
+C13 A#7 VSS 6.02803e-18
+C14 A#6 VSS 1.51575e-17
+C15 A#3 VSS 1.03441e-17
+C16 A#4 VSS 5.80112e-18
+C17 A VSS 1.40975e-17
+Rk15 A#8 A 0.011789 $metal1_conn  $L=0.14 $W=0.21 $X=0.125 $Y=0.695
+Rl16 A#1 Mmp0#g 39.833332 $poly_conn  $L=0.12 $W=0.039 $X=0.197 $Y=1.29
+Rl17 Mmp0#g A#3 65.192307 $poly_conn  $L=0.12 $W=0.039 $X=0.1975 $Y=0.8405
+Rl18 A#3 A#4 6.066559 $poly_conn  $L=0.068 $W=0.094 $X=0.175 $Y=0.73
+Rl19 A#3 Mmn0#g 37.087914 $poly_conn  $L=0.05 $W=0.039 $X=0.1975 $Y=0.655
+Rl20 Mmn0#g A#6 39.833332 $poly_conn  $L=0.1195 $W=0.039 $X=0.197 $Y=0.37
+Rl21 A#4 A#7 4.866560 $poly_conn  $L=0.0095 $W=0.094 $X=0.08 $Y=0.73
+Rx22 A#4 A#8 45.000000 $cont_poly  $L=0.06 $W=0.06 $N=1 $A=0.0036 $X=0.13 $Y=0.73
+*
+*|NET VSS 1.99591e-17
+*|P (VSS X 0 0.1000 0.0000)
+*|I (Mmn0#s Mmn0 s X 0 0.1745 0.5000)
+*|S (VSS#1 0.1100 0.1995)
+*|S (VSS#3 0.1100 0.1400)
+*|S (VSS#4 0.0000 0.0000)
+*|S (VSS#5 0.2000 0.0000)
+*|S (VSS#6 0.2000 0.0000)
+C18 Mmn0#s VSS 5.38448e-18
+C19 VSS#6 VSS 1.00923e-17
+C20 VSS#3 VSS 4.48234e-18
+Rk23 VSS#1 VSS#3 0.039148 $metal1_conn  $L=0.06025 $W=0.1 $X=0.1095 $Y=0.17
+Rk24 VSS#3 VSS 0.118431 $metal1_conn  $L=0.14 $W=0.1 $X=0.11 $Y=0.085
+Rk25 VSS VSS#4 0.050340 $metal1_conn  $L=0.10025 $W=0.125 $X=0.04 $Y=0
+Rk26 VSS VSS#6 0.050034 $metal1_conn  $L=0.2995 $W=0.125 $X=0.14 $Y=0
+Rz27 Mmn0#s VSS#3 75.000000 $cont_ndiff  $L=0.06 $W=0.06 $N=1 $A=0.0036 $X=0.11 $Y=0.14
+Ry28 VSS#5 VSS#6 31.000000 $cont_pdiff  $A=0.0072 $N=2 $X=0.2 $Y=0
+*
+*Instance Section
+*
+XMmn0	Mmn0#d	Mmn0#g	Mmn0#s	VSS	g45n1svt	L=4.5e-08
++ W=2.6e-07
++ AD=3.64e-14	AS=6.435e-14	PD=8e-07	PS=1.46e-06
++ sa=1.35e-07 sb=1.4e-07 sca=33.8579 scb=0.0409865 scc=0.00294474
+XMmp0	Mmp0#d	Mmp0#g	Mmp0#s	VDD	g45p1svt	L=4.5e-08
++ W=3.9e-07
++ AD=5.46e-14	AS=8.84e-14	PD=1.06e-06	PS=1.82e-06
++ sa=1.35e-07 sb=1.4e-07 sca=58.4044 scb=0.0588257 scc=0.00629162
+.ENDS

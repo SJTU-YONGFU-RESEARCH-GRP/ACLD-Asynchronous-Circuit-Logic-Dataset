@@ -1,0 +1,12 @@
+** Library name: gsclib045
+** Cell name: BUFX2
+** View name: schematic
+.subckt BUFX2 A Y VDD VSS
+*.PININFO  VSS:I VDD:I A:I Y:O
+** Above line required by Conformal LEC - DO NOT DELETE
+
+Xmn1 VSS n0 Y VSS g45n1svt L=45e-9 W=520e-9 AD=72.8e-15 AS=72.8e-15 PD=1.32e-6 PS=1.32e-6 NRD=269.231e-3 NRS=269.231e-3 M=1
+Xmn0 VSS A n0 VSS g45n1svt L=45e-9 W=145e-9 AD=20.3e-15 AS=20.3e-15 PD=570e-9 PS=570e-9 NRD=965.517e-3 NRS=965.517e-3 M=1
+Xmp1 Y n0 VDD VDD g45p1svt L=45e-9 W=780e-9 AD=109.2e-15 AS=109.2e-15 PD=1.84e-6 PS=1.84e-6 NRD=179.487e-3 NRS=179.487e-3 M=1
+Xmp0 n0 A VDD VDD g45p1svt L=45e-9 W=215e-9 AD=30.1e-15 AS=30.1e-15 PD=710e-9 PS=710e-9 NRD=651.163e-3 NRS=651.163e-3 M=1
+.ends BUFX2
