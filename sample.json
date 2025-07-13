@@ -1,0 +1,93 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-05-14",
+    "repositoryIdentifier": {
+      "id": 1,
+      "doi": "10.1109/ASYNC.2002.1000310",
+      "category": "Asynchronoys Circuit Logic (ACL)"
+    }
+  },
+  "publication": {
+    "title": "SPA - a synthesisable Amulet core for smartcard applications",
+    "venue": "Proceedings Eighth International Symposium on Asynchronous Circuits and Systems",
+    "type": "conferences",
+    "year": "2002",
+    "authors": [
+      "L.A. Plana",
+      "P.A. Riocreux",
+      "W.J. Bainbridge",
+      "A. Bardsley",
+      "J.D. Garside",
+      "S. Temple"
+    ]
+  },
+  "techniques": {
+    "isAsynchronous": true,
+    "delayModel": "Self-Timed Micro-Pipeline",
+    "datapathStructure": {
+      "handshakingProtocol": [
+        "Bundled-Data",
+        "2-phase"
+      ],
+      "pipelineStructure": "Data-Control-Decomposition"
+    },
+    "libraryName": "SPA"
+  },
+  "circuit": {
+    "type": "mux",
+    "signalProcessing": "DTDA",
+    "stateRetention": "Static",
+    "nonRatioed": true,
+    "hasClock": false,
+    "transistorCount": {
+      "nmos": 24,
+      "pmos": 24
+    },
+    "interface": {
+      "pgPins": [
+        "vdd",
+        "vss"
+      ],
+      "handshakingPins": [
+        "in_ack1",
+        "in_ack2",
+        "in_req",
+        "out_ack",
+        "out_req1",
+        "out_req2"
+      ],
+      "dataPins": [
+        "rstn",
+        "sel"
+      ]
+    }
+  },
+  "implementation": {
+    "netlist": "1_10.1109-ASYNC.2002.1000310.sp",
+    "testbenches": [
+      {
+        "id": "tb1",
+        "file": "1_10.1109-ASYNC.2002.1000310_tb1.sp",
+        "simulator": "HSPICE",
+        "type": "Transient",
+        "measurements": [
+          "Forward Delay",
+          "Backward Delay",
+          "Delay",
+          "Switching Energy"
+        ]
+      },
+      {
+        "id": "tb2",
+        "file": "1_10.1109-ASYNC.2002.1000310_tb2.sp",
+        "simulator": "HSPICE",
+        "type": "DC",
+        "measurements": [
+          "Leakage Power",
+          "Leakage Current"
+        ]
+      }
+    ]
+  }
+}
