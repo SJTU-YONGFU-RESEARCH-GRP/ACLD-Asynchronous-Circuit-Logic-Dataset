@@ -1,0 +1,78 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-06-29",
+    "repositoryIdentifier": {
+      "id": 28,
+      "doi": "10.1109/ASYNC.2001.914068",
+      "category": "Asynchronoys Circuit Logic (ACL)"
+    }
+  },
+  "publication": {
+    "title": "GasP: a minimal FIFO control",
+    "venue": "International Symposium on Asynchronous Circuits and Systems (ASYNC)",
+    "type": "Conference",
+    "year": "2001",
+    "authors": [
+      "I. Sutherland",
+      "S. Fairbanks"
+    ]
+  },
+  "techniques": {
+    "isAsynchronous": true,
+    "pipelineStructure": "Self-Timed Micro-Pipeline",
+    "dataChannelConfiguration": {
+      "dataCodingScheme": "Bundled-Data",
+      "communicationProtocol": "Four-phase"
+    },
+    "designTemplate": "GASP"
+  },
+  "circuit": {
+    "type": "GASPNANDX1",
+    "signalProcessing": "DTDA",
+    "stateRetention": "Static",
+    "nonRatioed": false,
+    "hasClock": false,
+    "transistorCount": {
+      "nmos": 9,
+      "pmos": 7
+    },
+    "interface": {
+      "pgPins": [
+        "VDD",
+        "VSS"
+      ],
+      "handshakingPins": [],
+      "dataPins": [
+        "data_in",
+        "data_out",
+        "s0",
+        "s1"
+      ]
+    }
+  },
+  "implementation": {
+    "netlist": "28_10.1109-ASYNC.2001.914068_ACL.sp",
+    "testbenches": [
+      {
+        "id": "tb1",
+        "file": "28_10.1109-ASYNC.2001.914068_ACL_tb1.sp",
+        "simulator": "Spectre",
+        "type": "Transient",
+        "measurements": [
+          "Delay",
+          "Switching Energy"
+        ]
+      },
+      {
+        "id": "tb2",
+        "file": "28_10.1109-ASYNC.2001.914068_ACL_tb2.sp",
+        "simulator": "Spectre",
+        "type": "DC",
+        "measurements": [
+          "Static Power"
+        ]
+      }
+    ]
+  }
+}

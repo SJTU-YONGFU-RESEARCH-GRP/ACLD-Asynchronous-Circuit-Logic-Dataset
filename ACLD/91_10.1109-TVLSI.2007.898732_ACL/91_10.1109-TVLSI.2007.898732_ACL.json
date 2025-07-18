@@ -1,0 +1,80 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-06-29",
+    "repositoryIdentifier": {
+      "id": 91,
+      "doi": "10.1109/TVLSI.2007.898732",
+      "category": "Asynchronoys Circuit Logic (ACL)"
+    }
+  },
+  "publication": {
+    "title": "MOUSETRAP: High-Speed Transition-Signaling Asynchronous Pipelines",
+    "venue": "IEEE Transactions on Very Large Scale Integration (VLSI) Systems",
+    "type": "Journal",
+    "year": "2007",
+    "authors": [
+      "Montek Singh",
+      "Steven M. Nowick"
+    ]
+  },
+  "techniques": {
+    "isAsynchronous": true,
+    "pipelineStructure": "Self-Timed Micro-Pipeline",
+    "dataChannelConfiguration": {
+      "dataCodingScheme": "Bundled-Data",
+      "communicationProtocol": "Two-phase"
+    },
+    "designTemplate": "MOUSETRAP"
+  },
+  "circuit": {
+    "type": "MBUFFX1",
+    "signalProcessing": "DTDA",
+    "stateRetention": "Static",
+    "nonRatioed": false,
+    "hasClock": false,
+    "transistorCount": {
+      "nmos": 25,
+      "pmos": 25
+    },
+    "interface": {
+      "pgPins": [
+        "VDD",
+        "VSS"
+      ],
+      "handshakingPins": [
+        "in_ack",
+        "in_req",
+        "out_req"
+      ],
+      "dataPins": [
+        "data_in",
+        "data_out"
+      ]
+    }
+  },
+  "implementation": {
+    "netlist": "91_10.1109-TVLSI.2007.898732_ACL.sp",
+    "testbenches": [
+      {
+        "id": "tb1",
+        "file": "91_10.1109-TVLSI.2007.898732_ACL_tb1.sp",
+        "simulator": "Spectre",
+        "type": "Transient",
+        "measurements": [
+          "Delay",
+          "Switching Energy"
+        ]
+      },
+      {
+        "id": "tb2",
+        "file": "91_10.1109-TVLSI.2007.898732_ACL_tb2.sp",
+        "simulator": "Spectre",
+        "type": "DC",
+        "measurements": [
+          "Static Power"
+        ]
+      }
+    ]
+  }
+}

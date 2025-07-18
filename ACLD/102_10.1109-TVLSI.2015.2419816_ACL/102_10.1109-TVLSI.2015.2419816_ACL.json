@@ -1,0 +1,79 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-06-29",
+    "repositoryIdentifier": {
+      "id": 102,
+      "doi": "10.1109/TVLSI.2015.2419816",
+      "category": "Asynchronoys Circuit Logic (ACL)"
+    }
+  },
+  "publication": {
+    "title": "Design for Testability of Sleep Convention Logic",
+    "venue": "IEEE Transactions on Very Large Scale Integration (VLSI) Systems",
+    "type": "Journal",
+    "year": "2016",
+    "authors": [
+      "Farhad A. Parsan",
+      "Scott C. Smith",
+      "Waleed K. Al-Assadi"
+    ]
+  },
+  "techniques": {
+    "isAsynchronous": true,
+    "pipelineStructure": "Quasi-Delay-Insensitive",
+    "dataChannelConfiguration": {
+      "dataCodingScheme": "Dual-Rail",
+      "communicationProtocol": "Four-phase"
+    },
+    "designTemplate": "SCL"
+  },
+  "circuit": {
+    "type": "TH12X1",
+    "signalProcessing": "DTDA",
+    "stateRetention": "Static",
+    "nonRatioed": false,
+    "hasClock": false,
+    "transistorCount": {
+      "nmos": 4,
+      "pmos": 4
+    },
+    "interface": {
+      "pgPins": [
+        "VDD",
+        "VSS"
+      ],
+      "handshakingPins": [],
+      "dataPins": [
+        "a",
+        "b",
+        "q",
+        "s"
+      ]
+    }
+  },
+  "implementation": {
+    "netlist": "102_10.1109-TVLSI.2015.2419816_ACL.sp",
+    "testbenches": [
+      {
+        "id": "tb1",
+        "file": "102_10.1109-TVLSI.2015.2419816_ACL_tb1.sp",
+        "simulator": "Spectre",
+        "type": "Transient",
+        "measurements": [
+          "Delay",
+          "Switching Energy"
+        ]
+      },
+      {
+        "id": "tb2",
+        "file": "102_10.1109-TVLSI.2015.2419816_ACL_tb2.sp",
+        "simulator": "Spectre",
+        "type": "DC",
+        "measurements": [
+          "Static Power"
+        ]
+      }
+    ]
+  }
+}

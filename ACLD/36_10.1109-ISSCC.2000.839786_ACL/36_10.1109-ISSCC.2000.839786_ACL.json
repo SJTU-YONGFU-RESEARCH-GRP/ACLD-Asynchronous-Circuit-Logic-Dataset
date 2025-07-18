@@ -1,0 +1,83 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-06-29",
+    "repositoryIdentifier": {
+      "id": 36,
+      "doi": "10.1109/ISSCC.2000.839786",
+      "category": "Asynchronoys Circuit Logic (ACL)"
+    }
+  },
+  "publication": {
+    "title": "Asynchronous interlocked pipelined CMOS circuits operating at 3.3-4.5 GHz",
+    "venue": "IEEE International Solid-State Circuits Conference. Digest of Technical Papers",
+    "type": "Conference",
+    "year": "2000",
+    "authors": [
+      "S. Schuster",
+      "W. Reohr",
+      "P. Cook",
+      "D. Heidel",
+      "M. Immediato",
+      "K. Jenkins"
+    ]
+  },
+  "techniques": {
+    "isAsynchronous": true,
+    "pipelineStructure": "Self-Timed Micro-Pipeline",
+    "dataChannelConfiguration": {
+      "dataCodingScheme": "Bundled-Data",
+      "communicationProtocol": "Four-phase"
+    },
+    "designTemplate": "IPCMOS"
+  },
+  "circuit": {
+    "type": "SWITCHX1",
+    "signalProcessing": "DTDA",
+    "stateRetention": "Static",
+    "nonRatioed": false,
+    "hasClock": false,
+    "transistorCount": {
+      "nmos": 6,
+      "pmos": 9
+    },
+    "interface": {
+      "pgPins": [
+        "VDD",
+        "VSS"
+      ],
+      "handshakingPins": [
+        "ack"
+      ],
+      "dataPins": [
+        "c",
+        "d",
+        "valid"
+      ]
+    }
+  },
+  "implementation": {
+    "netlist": "36_10.1109-ISSCC.2000.839786_ACL.sp",
+    "testbenches": [
+      {
+        "id": "tb1",
+        "file": "36_10.1109-ISSCC.2000.839786_ACL_tb1.sp",
+        "simulator": "Spectre",
+        "type": "Transient",
+        "measurements": [
+          "Delay",
+          "Switching Energy"
+        ]
+      },
+      {
+        "id": "tb2",
+        "file": "36_10.1109-ISSCC.2000.839786_ACL_tb2.sp",
+        "simulator": "Spectre",
+        "type": "DC",
+        "measurements": [
+          "Static Power"
+        ]
+      }
+    ]
+  }
+}

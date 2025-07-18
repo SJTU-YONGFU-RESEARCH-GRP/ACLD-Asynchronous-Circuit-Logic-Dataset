@@ -1,0 +1,96 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-06-29",
+    "repositoryIdentifier": {
+      "id": 97,
+      "doi": "10.1109/TVLSI.2016.2583118",
+      "category": "Asynchronoys Circuit Logic (ACL)"
+    }
+  },
+  "publication": {
+    "title": "Sense Amplifier Half-Buffer (SAHB) A Low-Power High-Performance Asynchronous Logic QDI Cell Template",
+    "venue": "IEEE Transactions on Very Large Scale Integration (VLSI) Systems",
+    "type": "Journal",
+    "year": "2017",
+    "authors": [
+      "Kwen-Siong Chong",
+      "Weng-Geng Ho",
+      "Tong Lin",
+      "Bah-Hwee Gwee",
+      "Joseph S. Chang"
+    ]
+  },
+  "techniques": {
+    "isAsynchronous": true,
+    "pipelineStructure": "Quasi-Delay-Insensitive",
+    "dataChannelConfiguration": {
+      "dataCodingScheme": "Dual-rail",
+      "communicationProtocol": "Four-phase"
+    },
+    "designTemplate": "SAHB"
+  },
+  "circuit": {
+    "type": "ANDX1",
+    "signalProcessing": "DTDA",
+    "stateRetention": "Static",
+    "nonRatioed": false,
+    "hasClock": false,
+    "transistorCount": {
+      "nmos": 24,
+      "pmos": 18
+    },
+    "interface": {
+      "pgPins": [
+        "VDD",
+        "VDDL",
+        "VSS"
+      ],
+      "handshakingPins": [
+        "l_ack",
+        "r_ack",
+        "nl_ack",
+        "nr_ack"
+      ],
+      "dataPins": [
+        "af",
+        "at",
+        "bf",
+        "bt",
+        "qf",
+        "qt",
+        "rst",
+        "naf",
+        "nat",
+        "nbf",
+        "nbt",
+        "nqf",
+        "nqt"
+      ]
+    }
+  },
+  "implementation": {
+    "netlist": "97_10.1109-TVLSI.2016.2583118_ACL.sp",
+    "testbenches": [
+      {
+        "id": "tb1",
+        "file": "97_10.1109-TVLSI.2016.2583118_ACl_tb1.sp",
+        "simulator": "Spectre",
+        "type": "Transient",
+        "measurements": [
+          "Delay",
+          "Switching Energy"
+        ]
+      },
+      {
+        "id": "tb2",
+        "file": "97_10.1109-TVLSI.2016.2583118_ACl_tb2.sp",
+        "simulator": "Spectre",
+        "type": "DC",
+        "measurements": [
+          "Static Power"
+        ]
+      }
+    ]
+  }
+}

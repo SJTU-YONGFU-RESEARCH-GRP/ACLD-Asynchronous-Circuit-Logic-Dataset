@@ -1,0 +1,85 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-06-29",
+    "repositoryIdentifier": {
+      "id": 85,
+      "doi": "10.1109/ASYNC.2002.1000292",
+      "category": "Asynchronoys Circuit Logic (ACL)"
+    }
+  },
+  "publication": {
+    "title": "High-speed QDI asynchronous pipelines",
+    "venue": "International Symposium on Asynchronous Circuits and Systems",
+    "type": "Conference",
+    "year": "1997",
+    "authors": [
+      "R.O. Ozdag",
+      "P.A. Beerel"
+    ]
+  },
+  "techniques": {
+    "isAsynchronous": true,
+    "pipelineStructure": "Quasi-Delay-Insensitive",
+    "dataChannelConfiguration": {
+      "dataCodingScheme": "Dual-Rail",
+      "communicationProtocol": "Four-phase"
+    },
+    "designTemplate": "RSPCHB"
+  },
+  "circuit": {
+    "type": "ROR2X1",
+    "signalProcessing": "DTDA",
+    "stateRetention": "Static",
+    "nonRatioed": false,
+    "hasClock": false,
+    "transistorCount": {
+      "nmos": 16,
+      "pmos": 12
+    },
+    "interface": {
+      "pgPins": [
+        "VDD",
+        "VSS"
+      ],
+      "handshakingPins": [
+        "in_ack",
+        "in_req",
+        "out_ack",
+        "out_req"
+      ],
+      "dataPins": [
+        "a0",
+        "a1",
+        "b0",
+        "b1",
+        "c0",
+        "c1"
+      ]
+    }
+  },
+  "implementation": {
+    "netlist": "85_10.1109-ASYNC.2002.1000292_ACL.sp",
+    "testbenches": [
+      {
+        "id": "tb1",
+        "file": "85_10.1109-ASYNC.2002.1000292_ACL_tb1.sp",
+        "simulator": "Spectre",
+        "type": "Transient",
+        "measurements": [
+          "Delay",
+          "Switching Energy"
+        ]
+      },
+      {
+        "id": "tb2",
+        "file": "85_10.1109-ASYNC.2002.1000292_ACL_tb2.sp",
+        "simulator": "Spectre",
+        "type": "DC",
+        "measurements": [
+          "Static Power"
+        ]
+      }
+    ]
+  }
+}

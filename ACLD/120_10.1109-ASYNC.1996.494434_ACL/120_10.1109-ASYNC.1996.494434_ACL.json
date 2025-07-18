@@ -1,0 +1,82 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-06-29",
+    "repositoryIdentifier": {
+      "id": 120,
+      "doi": "10.1109/ASYNC.1996.494434",
+      "category": "Asynchronoys Circuit Logic (ACL)"
+    }
+  },
+  "publication": {
+    "title": "High-performance asynchronous pipeline circuits",
+    "venue": "International Symposium on Advanced Research in Asynchronous Circuits and Systems",
+    "type": "Conference",
+    "year": "1996",
+    "authors": [
+      "K.Y. Yun",
+      "P.A. Beerel",
+      "J. Arceo"
+    ]
+  },
+  "techniques": {
+    "isAsynchronous": true,
+    "pipelineStructure": "Self-Timed Micro-Pipeline",
+    "dataChannelConfiguration": {
+      "dataCodingScheme": "Bundled-Data",
+      "communicationProtocol": "Two-phase"
+    },
+    "designTemplate": "TPDETFF"
+  },
+  "circuit": {
+    "type": "TPDBUFFX1",
+    "signalProcessing": "DTDA",
+    "stateRetention": "Static",
+    "nonRatioed": false,
+    "hasClock": false,
+    "transistorCount": {
+      "nmos": 19,
+      "pmos": 19
+    },
+    "interface": {
+      "pgPins": [
+        "VDD",
+        "VSS"
+      ],
+      "handshakingPins": [
+        "in_ack",
+        "in_req",
+        "out_ack",
+        "out_req"
+      ],
+      "dataPins": [
+        "data_in",
+        "data_out"
+      ]
+    }
+  },
+  "implementation": {
+    "netlist": "120_10.1109-ASYNC.1996.494434_ACL.sp",
+    "testbenches": [
+      {
+        "id": "tb1",
+        "file": "120_10.1109-ASYNC.1996.494434_ACL_tb1.sp",
+        "simulator": "Spectre",
+        "type": "Transient",
+        "measurements": [
+          "Delay",
+          "Switching Energy"
+        ]
+      },
+      {
+        "id": "tb2",
+        "file": "120_10.1109-ASYNC.1996.494434_ACL_tb2.sp",
+        "simulator": "Spectre",
+        "type": "DC",
+        "measurements": [
+          "Static Power"
+        ]
+      }
+    ]
+  }
+}

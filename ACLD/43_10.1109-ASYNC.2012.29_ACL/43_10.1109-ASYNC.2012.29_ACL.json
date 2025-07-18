@@ -1,0 +1,84 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-06-29",
+    "repositoryIdentifier": {
+      "id": 43,
+      "doi": "10.1109/ASYNC.2012.29",
+      "category": "Asynchronoys Circuit Logic (ACL)"
+    }
+  },
+  "publication": {
+    "title": "A Pseudo-Synchronous Implementation Flow for WCHB QDI Asynchronous Circuits",
+    "venue": "IEEE International Symposium on Asynchronous Circuits and Systems",
+    "type": "Conference",
+    "year": "2012",
+    "authors": [
+      "Yvain Thonnart",
+      "Edith Beigne",
+      "Pascal Vivet"
+    ]
+  },
+  "techniques": {
+    "isAsynchronous": true,
+    "pipelineStructure": "Quasi-Delay-Insensitive",
+    "dataChannelConfiguration": {
+      "dataCodingScheme": "Dual-rail",
+      "communicationProtocol": "Four-phase"
+    },
+    "designTemplate": "WCHB"
+  },
+  "circuit": {
+    "type": "WNOR2X1",
+    "signalProcessing": "DTDA",
+    "stateRetention": "Static",
+    "nonRatioed": false,
+    "hasClock": false,
+    "transistorCount": {
+      "nmos": 17,
+      "pmos": 15
+    },
+    "interface": {
+      "pgPins": [
+        "VDD",
+        "VSS"
+      ],
+      "handshakingPins": [
+        "in_ack",
+        "out_ack"
+      ],
+      "dataPins": [
+        "a0",
+        "a1",
+        "b0",
+        "b1",
+        "c0",
+        "c1"
+      ]
+    }
+  },
+  "implementation": {
+    "netlist": "43_10.1109-ASYNC.2012.29_ACL.sp",
+    "testbenches": [
+      {
+        "id": "tb1",
+        "file": "43_10.1109-ASYNC.2012.29_ACL_tb1.sp",
+        "simulator": "Spectre",
+        "type": "Transient",
+        "measurements": [
+          "Delay",
+          "Switching Energy"
+        ]
+      },
+      {
+        "id": "tb2",
+        "file": "43_10.1109-ASYNC.2012.29_ACL_tb2.sp",
+        "simulator": "Spectre",
+        "type": "DC",
+        "measurements": [
+          "Static Power"
+        ]
+      }
+    ]
+  }
+}

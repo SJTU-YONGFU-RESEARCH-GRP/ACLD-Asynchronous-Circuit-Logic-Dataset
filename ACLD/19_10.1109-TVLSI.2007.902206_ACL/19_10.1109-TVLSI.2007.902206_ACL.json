@@ -1,0 +1,84 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-06-29",
+    "repositoryIdentifier": {
+      "id": 19,
+      "doi": "10.1109/TVLSI.2007.902206",
+      "category": "Asynchronoys Circuit Logic (ACL)"
+    }
+  },
+  "publication": {
+    "title": "The Design of High-Performance Dynamic Asynchronous Pipelines: High-Capacity Style",
+    "venue": "IEEE Transactions on Very Large Scale Integration (VLSI) Systems",
+    "type": "Journal",
+    "year": "2007",
+    "authors": [
+      "Montek Singh",
+      "Steven M. Nowick"
+    ]
+  },
+  "techniques": {
+    "isAsynchronous": true,
+    "pipelineStructure": "Self-Timed Micro-Pipeline",
+    "dataChannelConfiguration": {
+      "dataCodingScheme": "Bundled-Data",
+      "communicationProtocol": "Four-phase"
+    },
+    "designTemplate": "HC"
+  },
+  "circuit": {
+    "type": "HCANDX1",
+    "signalProcessing": "DTDA",
+    "stateRetention": "Static",
+    "nonRatioed": false,
+    "hasClock": false,
+    "transistorCount": {
+      "nmos": 20,
+      "pmos": 15
+    },
+    "interface": {
+      "pgPins": [
+        "VDD",
+        "VSS"
+      ],
+      "handshakingPins": [
+        "in_ack",
+        "in_req",
+        "out_ack"
+      ],
+      "dataPins": [
+        "a0",
+        "a1",
+        "b0",
+        "b1",
+        "r0",
+        "r1"
+      ]
+    }
+  },
+  "implementation": {
+    "netlist": "19_10.1109-TVLSI.2007.902206_ACL.sp",
+    "testbenches": [
+      {
+        "id": "tb1",
+        "file": "19_10.1109-TVLSI.2007.902206_ACL_tb1.sp",
+        "simulator": "Spectre",
+        "type": "Transient",
+        "measurements": [
+          "Delay",
+          "Switching Energy"
+        ]
+      },
+      {
+        "id": "tb2",
+        "file": "19_10.1109-TVLSI.2007.902206_ACL_tb2.sp",
+        "simulator": "Spectre",
+        "type": "DC",
+        "measurements": [
+          "Static Power"
+        ]
+      }
+    ]
+  }
+}

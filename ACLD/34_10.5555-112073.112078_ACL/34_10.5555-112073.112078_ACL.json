@@ -1,0 +1,86 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-06-29",
+    "repositoryIdentifier": {
+      "id": 34,
+      "doi": "10.5555/112073.112078",
+      "category": "Asynchronoys Circuit Logic (ACL)"
+    }
+  },
+  "publication": {
+    "title": "Efficient self-timing with level-encoded 2-phase dual-rail (LEDR)",
+    "venue": "University of California/Santa Cruz conference on Advanced research in VLSI",
+    "type": "Conference",
+    "year": "1991",
+    "authors": [
+      "Mark E Dean",
+      "Ted E Williams",
+      "David L Dill"
+    ]
+  },
+  "techniques": {
+    "isAsynchronous": true,
+    "pipelineStructure": "Quasi-Delay-Insensitive",
+    "dataChannelConfiguration": {
+      "dataCodingScheme": "Dual-rail",
+      "communicationProtocol": "Two-phase"
+    },
+    "designTemplate": "LEDR"
+  },
+  "circuit": {
+    "type": "DECODERX1",
+    "signalProcessing": "DTDA",
+    "stateRetention": "Static",
+    "nonRatioed": false,
+    "hasClock": false,
+    "transistorCount": {
+      "nmos": 82,
+      "pmos": 82
+    },
+    "interface": {
+      "pgPins": [
+        "VDD",
+        "VSS"
+      ],
+      "handshakingPins": [],
+      "dataPins": [
+        "cd",
+        "cl",
+        "d1",
+        "d2",
+        "data_out10",
+        "data_out11",
+        "data_out20",
+        "data_out21",
+        "en",
+        "p1",
+        "p2"
+      ]
+    }
+  },
+  "implementation": {
+    "netlist": "34_10.5555-112073.112078_ACL.sp",
+    "testbenches": [
+      {
+        "id": "tb1",
+        "file": "34_10.5555-112073.112078_ACL_tb1.sp",
+        "simulator": "Spectre",
+        "type": "Transient",
+        "measurements": [
+          "Delay",
+          "Switching Energy"
+        ]
+      },
+      {
+        "id": "tb2",
+        "file": "34_10.5555-112073.112078_ACL_tb2.sp",
+        "simulator": "Spectre",
+        "type": "DC",
+        "measurements": [
+          "Static Power"
+        ]
+      }
+    ]
+  }
+}

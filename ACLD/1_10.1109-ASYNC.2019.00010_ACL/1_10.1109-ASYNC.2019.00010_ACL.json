@@ -1,0 +1,83 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-06-29",
+    "repositoryIdentifier": {
+      "id": 1,
+      "doi": "10.1109/ASYNC.2019.00010",
+      "category": "Asynchronoys Circuit Logic (ACL)"
+    }
+  },
+  "publication": {
+    "title": "Design and FPGA-implementation of Asynchronous Circuits Using Two-Phase Handshaking",
+    "venue": "IEEE International Symposium on Asynchronous Circuits and Systems",
+    "type": "Conference",
+    "year": "2019",
+    "authors": [
+      "Adrian Mardari",
+      "Zuzana Jelčicová",
+      "Jens Sparsø"
+    ]
+  },
+  "techniques": {
+    "isAsynchronous": true,
+    "pipelineStructure": "Self-Timed Micro-Pipeline",
+    "dataChannelConfiguration": {
+      "dataCodingScheme": "Bundled-Data",
+      "communicationProtocol": "Two-Phase"
+    },
+    "designTemplate": "PD-CLICK"
+  },
+  "circuit": {
+    "type": "PDREG",
+    "signalProcessing": "DTDA",
+    "stateRetention": "Static",
+    "nonRatioed": false,
+    "hasClock": false,
+    "transistorCount": {
+      "nmos": 66,
+      "pmos": 66
+    },
+    "interface": {
+      "pgPins": [
+        "VDD",
+        "VSS"
+      ],
+      "handshakingPins": [
+        "in_ack",
+        "in_req",
+        "out_ack",
+        "out_req"
+      ],
+      "dataPins": [
+        "data_in",
+        "data_out",
+        "rstn"
+      ]
+    }
+  },
+  "implementation": {
+    "netlist": "1_10.1109-ASYNC.2019.00010_ACL.sp",
+    "testbenches": [
+      {
+        "id": "tb1",
+        "file": "1_10.1109-ASYNC.2019.00010_ACL_tb1.sp",
+        "simulator": "Spectre",
+        "type": "Transient",
+        "measurements": [
+          "Delay",
+          "Switching Energy"
+        ]
+      },
+      {
+        "id": "tb2",
+        "file": "1_10.1109-ASYNC.2019.00010_ACL_tb2.sp",
+        "simulator": "Spectre",
+        "type": "DC",
+        "measurements": [
+          "Static Power"
+        ]
+      }
+    ]
+  }
+}

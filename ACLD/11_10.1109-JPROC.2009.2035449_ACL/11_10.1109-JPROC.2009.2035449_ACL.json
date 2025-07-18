@@ -1,0 +1,82 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-06-29",
+    "repositoryIdentifier": {
+      "id": 11,
+      "doi": "10.1109/JPROC.2009.2035449",
+      "category": "Asynchronoys Circuit Logic (ACL)"
+    }
+  },
+  "publication": {
+    "title": "Ultralow-Power Operation in Subthreshold Regimes Applying Clockless Logic",
+    "venue": "Proceedings of the IEEE",
+    "type": "Conference",
+    "year": "2010",
+    "authors": [
+      "Ryan D. Jorgenson",
+      "Lief Sorensen",
+      "Dan Leet",
+      "Michael S. Hagedorn",
+      "David R. Lamb",
+      "Thomas Hal Friddell",
+      "Warren P. Snapp"
+    ]
+  },
+  "techniques": {
+    "isAsynchronous": true,
+    "pipelineStructure": "Quasi-Delay-Insensitive",
+    "dataChannelConfiguration": {
+      "dataCodingScheme": "Dual-rail",
+      "communicationProtocol": "Four-phase"
+    },
+    "designTemplate": "NCL"
+  },
+  "circuit": {
+    "type": "INCL2W11OF2X1",
+    "signalProcessing": "DTDA",
+    "stateRetention": "Static",
+    "nonRatioed": false,
+    "hasClock": false,
+    "transistorCount": {
+      "nmos": 7,
+      "pmos": 7
+    },
+    "interface": {
+      "pgPins": [
+        "VDD",
+        "VSS"
+      ],
+      "handshakingPins": [],
+      "dataPins": [
+        "a",
+        "b",
+        "q"
+      ]
+    }
+  },
+  "implementation": {
+    "netlist": "11_10.1109-JPROC.2009.2035449_ACL.sp",
+    "testbenches": [
+      {
+        "id": "tb1",
+        "file": "11_10.1109-JPROC.2009.2035449_ACL_tb1.sp",
+        "simulator": "Spectre",
+        "type": "Transient",
+        "measurements": [
+          "Delay",
+          "Switching Energy"
+        ]
+      },
+      {
+        "id": "tb2",
+        "file": "11_10.1109-JPROC.2009.2035449_ACL_tb2.sp",
+        "simulator": "Spectre",
+        "type": "DC",
+        "measurements": [
+          "Static Power"
+        ]
+      }
+    ]
+  }
+}

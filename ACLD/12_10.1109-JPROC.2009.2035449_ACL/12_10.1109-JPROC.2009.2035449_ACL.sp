@@ -1,0 +1,32 @@
+/ Generated for: spectre
+// Generated on: Jul  1 18:12:28 2025
+// Design library name: AscendNCLCell
+// Design cell name: testing
+// Design view name: schematic
+simulator lang=spectre
+global 0
+include "/home/yongfu/research-freepdk-library/Cadence45/TECH/GPDK045/gpdk045_v_6_0/gpdk045/../models/spectre/gpdk045.scs" section=mc
+
+// Library name: AscendNCLCell
+// Cell name: INCL1W11OF2X1
+// View name: schematic
+subckt INCL1W11OF2X1 a b q VDD VSS
+    M_i_1 (q b VSS VSS) g45n1svt w=260.00n l=45n as=1.2013e-14 \
+        ad=1.2013e-14 ps=310.0n pd=310.0n ld=105n ls=105n m=1
+    M_i_0 (VSS a q VSS) g45n1svt w=260.00n l=45n as=1.2013e-14 \
+        ad=1.2013e-14 ps=310.0n pd=310.0n ld=105n ls=105n m=1
+    M_i_2 (q a net_0 VDD) g45p1svt w=390.0n l=45n as=3.125e-14 \
+        ad=3.125e-14 ps=500n pd=500n ld=105n ls=105n m=1
+    M_i_3 (net_0 b VDD VDD) g45p1svt w=390.0n l=45n as=3.125e-14 \
+        ad=3.125e-14 ps=500n pd=500n ld=105n ls=105n m=1
+ends INCL1W11OF2X1
+// End of subcircuit definition.
+
+// Library name: AscendNCLCell
+// Cell name: testing
+// View name: schematic
+I8 (net3 net2 net1) INCL1W11OF2X1
+simulatorOptions options reltol=1e-3 vabstol=1e-6 iabstol=1e-12 temp=27 \
+    tnom=27 scalem=1.0 scale=1.0 gmin=1e-12 rforce=1 maxnotes=5 maxwarns=5 \
+    digits=5 cols=80 pivrel=1e-3 sensfile="../psf/sens.output" \
+    checklimitdest=psf 

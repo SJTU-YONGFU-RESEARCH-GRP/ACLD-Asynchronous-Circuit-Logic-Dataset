@@ -1,0 +1,85 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-06-29",
+    "repositoryIdentifier": {
+      "id": 119,
+      "doi": "10.1109/ASYNC.2008.23",
+      "category": "Asynchronoys Circuit Logic (ACL)"
+    }
+  },
+  "publication": {
+    "title": "Asynchronous Computing in Sense Amplifier-Based Pass Transistor Logic",
+    "venue": "IEEE International Symposium on Asynchronous Circuits and Systems",
+    "type": "Conference",
+    "year": "2008",
+    "authors": [
+      "Tsung-Te Liu",
+      "Louis P. Alarcón",
+      "Matthew D. Pierson",
+      "Jan M. Rabaey"
+    ]
+  },
+  "techniques": {
+    "isAsynchronous": true,
+    "pipelineStructure": "Timed-Pipeline",
+    "dataChannelConfiguration": {
+      "dataCodingScheme": "Dual-Rail",
+      "communicationProtocol": "Four-phase"
+    },
+    "designTemplate": "SAPTL"
+  },
+  "circuit": {
+    "type": "SAPTLBUFFX1",
+    "signalProcessing": "DTDA",
+    "stateRetention": "Static",
+    "nonRatioed": false,
+    "hasClock": false,
+    "transistorCount": {
+      "nmos": 11,
+      "pmos": 11
+    },
+    "interface": {
+      "pgPins": [
+        "VDD",
+        "VSS"
+      ],
+      "handshakingPins": [
+        "in_ack",
+        "in_req",
+        "out_ack",
+        "out_req"
+      ],
+      "dataPins": [
+        "l0",
+        "l1",
+        "r0",
+        "r1"
+      ]
+    }
+  },
+  "implementation": {
+    "netlist": "119_10.1109-ASYNC.2008.23_ACL.sp",
+    "testbenches": [
+      {
+        "id": "tb1",
+        "file": "119_10.1109-ASYNC.2008.23_ACL_tb1.sp",
+        "simulator": "Spectre",
+        "type": "Transient",
+        "measurements": [
+          "Delay",
+          "Switching Energy"
+        ]
+      },
+      {
+        "id": "tb2",
+        "file": "119_10.1109-ASYNC.2008.23_ACL_tb2.sp",
+        "simulator": "Spectre",
+        "type": "DC",
+        "measurements": [
+          "Static Power"
+        ]
+      }
+    ]
+  }
+}

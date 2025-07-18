@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-06-29",
+    "repositoryIdentifier": {
+      "id": 68,
+      "doi": "10.1145/63526.63532",
+      "category": "Asynchronoys Circuit Logic (ACL)"
+    }
+  },
+  "publication": {
+    "title": "Micropipelines",
+    "venue": "Communications of the ACM",
+    "type": "Magazine",
+    "year": "1989",
+    "authors": [
+      "I. E. Sutherland"
+    ]
+  },
+  "techniques": {
+    "isAsynchronous": true,
+    "pipelineStructure": "Self-Timed Micro-Pipeline",
+    "dataChannelConfiguration": {
+      "dataCodingScheme": "Bundled-data",
+      "communicationProtocol": "Two-phase"
+    },
+    "designTemplate": "Sutherland"
+  },
+  "circuit": {
+    "type": "TOGGLEX1",
+    "signalProcessing": "DTDA",
+    "stateRetention": "Static",
+    "nonRatioed": false,
+    "hasClock": false,
+    "transistorCount": {
+      "nmos": 12,
+      "pmos": 14
+    },
+    "interface": {
+      "pgPins": [
+        "VDD",
+        "VSS"
+      ],
+      "handshakingPins": [],
+      "dataPins": [
+        "a",
+        "blank",
+        "dot",
+        "rstn"
+      ]
+    }
+  },
+  "implementation": {
+    "netlist": "68_10.1145-63526.63532_ACL.sp",
+    "testbenches": [
+      {
+        "id": "tb1",
+        "file": "68_10.1145-63526.63532_ACL_tb1.sp",
+        "simulator": "Spectre",
+        "type": "Transient",
+        "measurements": [
+          "Delay",
+          "Switching Energy"
+        ]
+      },
+      {
+        "id": "tb2",
+        "file": "68_10.1145-63526.63532_ACL_tb2.sp",
+        "simulator": "Spectre",
+        "type": "DC",
+        "measurements": [
+          "Static Power"
+        ]
+      }
+    ]
+  }
+}

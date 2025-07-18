@@ -1,0 +1,80 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-06-29",
+    "repositoryIdentifier": {
+      "id": 65,
+      "doi": "10.1109/ASYNC.2010.11",
+      "category": "Asynchronoys Circuit Logic (ACL)"
+    }
+  },
+  "publication": {
+    "title": "Click Elements: An Implementation Style for Data-Driven Compilation",
+    "venue": "IEEE Symposium on Asynchronous Circuits and Systems",
+    "type": "Conference",
+    "year": "2010",
+    "authors": [
+      "Ad Peeters",
+      "Frank te Beest",
+      "Mark de Wit",
+      "Willem Mallon"
+    ]
+  },
+  "techniques": {
+    "isAsynchronous": true,
+    "pipelineStructure": "Self-Timed Micro-Pipeline",
+    "dataChannelConfiguration": {
+      "dataCodingScheme": "Bundled-data",
+      "communicationProtocol": "Two-phase"
+    },
+    "designTemplate": "CLICK"
+  },
+  "circuit": {
+    "type": "JOIN",
+    "signalProcessing": "DTDA",
+    "stateRetention": "Static",
+    "nonRatioed": false,
+    "hasClock": false,
+    "transistorCount": {
+      "nmos": 36,
+      "pmos": 36
+    },
+    "interface": {
+      "pgPins": [
+        "VDD",
+        "VSS"
+      ],
+      "handshakingPins": [
+        "in0_req",
+        "in1_req",
+        "in_ack",
+        "out_req"
+      ],
+      "dataPins": []
+    }
+  },
+  "implementation": {
+    "netlist": "65_10.1109-ASYNC.2010.11_ACL.sp",
+    "testbenches": [
+      {
+        "id": "tb1",
+        "file": "65_10.1109-ASYNC.2010.11_ACL_tb1.sp",
+        "simulator": "Spectre",
+        "type": "Transient",
+        "measurements": [
+          "Delay",
+          "Switching Energy"
+        ]
+      },
+      {
+        "id": "tb2",
+        "file": "65_10.1109-ASYNC.2010.11_ACL_tb2.sp",
+        "simulator": "Spectre",
+        "type": "DC",
+        "measurements": [
+          "Static Power"
+        ]
+      }
+    ]
+  }
+}

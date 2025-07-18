@@ -1,0 +1,78 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-06-29",
+    "repositoryIdentifier": {
+      "id": 109,
+      "doi": "10.1109/JSSC.2006.874308",
+      "category": "Asynchronoys Circuit Logic (ACL)"
+    }
+  },
+  "publication": {
+    "title": "High performance asynchronous design using single-track full-buffer standard cells",
+    "venue": "IEEE Journal of Solid-State Circuits",
+    "type": "Journal",
+    "year": "2006",
+    "authors": [
+      "M. Ferretti",
+      "P.A. Beerel"
+    ]
+  },
+  "techniques": {
+    "isAsynchronous": true,
+    "pipelineStructure": "Single-Track",
+    "dataChannelConfiguration": {
+      "dataCodingScheme": "Single-Track",
+      "communicationProtocol": "Two-phase"
+    },
+    "designTemplate": "STFB"
+  },
+  "circuit": {
+    "type": "STFBBUFFX1",
+    "signalProcessing": "DTDA",
+    "stateRetention": "Static",
+    "nonRatioed": false,
+    "hasClock": false,
+    "transistorCount": {
+      "nmos": 8,
+      "pmos": 8
+    },
+    "interface": {
+      "pgPins": [
+        "VDD",
+        "VSS"
+      ],
+      "handshakingPins": [],
+      "dataPins": [
+        "l0",
+        "l1",
+        "r0",
+        "r1"
+      ]
+    }
+  },
+  "implementation": {
+    "netlist": "109_10.1109-JSSC.2006.874308_ACL.sp",
+    "testbenches": [
+      {
+        "id": "tb1",
+        "file": "109_10.1109-JSSC.2006.874308_ACL_tb1.sp",
+        "simulator": "Spectre",
+        "type": "Transient",
+        "measurements": [
+          "Delay",
+          "Switching Energy"
+        ]
+      },
+      {
+        "id": "tb2",
+        "file": "109_10.1109-JSSC.2006.874308_ACL_tb2.sp",
+        "simulator": "Spectre",
+        "type": "DC",
+        "measurements": [
+          "Static Power"
+        ]
+      }
+    ]
+  }
+}
