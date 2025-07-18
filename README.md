@@ -131,7 +131,7 @@ For more details, see the [LICENSE](https://creativecommons.org/licenses/by/4.0/
 If you use this dataset in your research or publication, please cite the relevant article associated with the dataset. Use the following BibTeX format as a template:
 
 ```bibtex
-@article{author2024acld,
+@article{ACLD2025,
   title="{Descriptor: Asynchronous Circuit Logic Dataset (ACLD)}",
   author={Ji, Yuxin and Du, Haochen and Wang, Chao and Hou, Yuting and Li, Yongfu},
   note = {Manuscript under review, IEEE Data Descriptions},
