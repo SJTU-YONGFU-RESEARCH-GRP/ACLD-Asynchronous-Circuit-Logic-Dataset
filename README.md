@@ -122,7 +122,7 @@ You are free to:
 Under the following terms:
 - **Attribution** — You must give appropriate credit, provide a link to the license, and indicate if changes were made.
 
-For more details, see the [LICENSE](LICENSE) file.
+For more details, see the [LICENSE](https://creativecommons.org/licenses/by/4.0/legalcode) file.
 
 ---
 
