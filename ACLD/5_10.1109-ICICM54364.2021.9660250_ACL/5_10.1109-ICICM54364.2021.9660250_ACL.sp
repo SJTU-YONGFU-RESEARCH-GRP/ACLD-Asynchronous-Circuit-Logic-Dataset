@@ -5,7 +5,7 @@
 // Design view name: schematic
 simulator lang=spectre
 global 0 VSS! VDD!
-include "/home/yongfu/research-freepdk-library/Cadence45/TECH/GPDK045/gpdk045_v_6_0/gpdk045/../models/spectre/gpdk045.scs" section=mc
+include "../../../input/spectre/gpdk045.scs" section=mc
 
 // Library name: RTCell045
 // Cell name: RTNOR2X1

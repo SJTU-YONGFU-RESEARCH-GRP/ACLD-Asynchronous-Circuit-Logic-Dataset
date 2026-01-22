@@ -23,7 +23,7 @@
   },
   "techniques": {
     "isAsynchronous": true,
-    "pipelineStructure": "Quasi-Delay-Insensitive",
+    "pipelineStructure": "Quasi-Trans_Delay-Insensitive",
     "dataChannelConfiguration": {
       "dataCodingScheme": "Dual-rail",
       "communicationProtocol": "Four-phase"
@@ -78,8 +78,8 @@
         "simulator": "Spectre",
         "type": "Transient",
         "measurements": [
-          "Delay",
-          "Switching Energy"
+          "Trans_Delay",
+          "Switching_Energy"
         ]
       },
       {
@@ -88,7 +88,7 @@
         "simulator": "Spectre",
         "type": "DC",
         "measurements": [
-          "Static Power"
+          "Static_Power"
         ]
       }
     ]

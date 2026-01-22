@@ -59,8 +59,8 @@
         "simulator": "Spectre",
         "type": "Transient",
         "measurements": [
-          "Delay",
-          "Switching Energy"
+          "Trans_Delay",
+          "Switching_Energy"
         ]
       },
       {
@@ -69,7 +69,7 @@
         "simulator": "Spectre",
         "type": "DC",
         "measurements": [
-          "Static Power"
+          "Static_Power"
         ]
       }
     ]

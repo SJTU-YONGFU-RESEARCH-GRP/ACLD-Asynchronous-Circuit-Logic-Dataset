@@ -5,7 +5,7 @@
 // Design view name: schematic
 simulator lang=spectre
 global 0
-include "/home/yongfu/research-freepdk-library/Cadence45/TECH/GPDK045/gpdk045_v_6_0/gpdk045/../models/spectre/gpdk045.scs" section=mc
+include "../../../input/spectre/gpdk045.scs" section=mc
 
 // Library name: gsclib045
 // Cell name: INVX1
@@ -51,19 +51,19 @@ ends COMPLETX1
 // Library name: SAHBCell045
 // Cell name: CsubBUFFX1
 // View name: schematic
-subckt CsubBUFFX1 qt qt VDD VDDV VSS nqf nqt
-    NM1 (qt qt VSS VSS) g45n1svt w=(260n) l=45n nf=1 as=36.4f ad=36.4f \
+subckt CsubBUFFX1 qf qt VDD VDDV VSS nqf nqt
+    NM1 (qt qf VSS VSS) g45n1svt w=(260n) l=45n nf=1 as=36.4f ad=36.4f \
         ps=800n pd=800n nrd=538.462m nrs=538.462m sa=140n sb=140n sd=160n \
         sca=144.98299 scb=0.10251 scc=0.01780 m=(1)
-    NM0 (qt qt VSS VSS) g45n1svt w=(260n) l=45n nf=1 as=36.4f ad=36.4f \
+    NM0 (qf qt VSS VSS) g45n1svt w=(260n) l=45n nf=1 as=36.4f ad=36.4f \
         ps=800n pd=800n nrd=538.462m nrs=538.462m sa=140n sb=140n sd=160n \
         sca=144.98299 scb=0.10251 scc=0.01780 m=(1)
     I0 (qt nqt VDD VSS) INVX1
-    I2 (qt nqf VDD VSS) INVX1
-    PM1 (qt qt VDDV VDD) g45p1svt w=(390n) l=45n nf=1 as=54.6f ad=54.6f \
+    I2 (qf nqf VDD VSS) INVX1
+    PM1 (qt qf VDDV VDD) g45p1svt w=(390n) l=45n nf=1 as=54.6f ad=54.6f \
         ps=1.06u pd=1.06u nrd=358.974m nrs=358.974m sa=140n sb=140n \
         sd=160n sca=114.89040 scb=0.09003 scc=0.01377 m=(1)
-    PM0 (qt qt VDDV VDD) g45p1svt w=(390n) l=45n nf=1 as=54.6f ad=54.6f \
+    PM0 (qf qt VDDV VDD) g45p1svt w=(390n) l=45n nf=1 as=54.6f ad=54.6f \
         ps=1.06u pd=1.06u nrd=358.974m nrs=358.974m sa=140n sb=140n \
         sd=160n sca=114.89040 scb=0.09003 scc=0.01377 m=(1)
 ends CsubBUFFX1
@@ -72,7 +72,7 @@ ends CsubBUFFX1
 // Library name: SAHBCell045
 // Cell name: SINVX1
 // View name: schematic
-subckt SINVX1 af at l_ack qt qt rst r_ack VDD VDDL VSS naf nat \
+subckt SINVX1 af at l_ack qf qt rst r_ack VDD VDDL VSS naf nat \
         nl_ack nqf nqt nr_ack
     NM11 (VDDL nr_ack net017 VSS) g45n1svt w=(260n) l=45n nf=1 as=36.4f \
         ad=36.4f ps=800n pd=800n nrd=538.462m nrs=538.462m sa=140n sb=140n \
@@ -170,3 +170,9 @@ designParamVals info what=parameters where=rawfile
 primitives info what=primitives where=rawfile
 subckts info what=subckts  where=rawfile
 saveOptions options save=allpub
+parameters vdd=1.2
+
+simulator lang=spice
+.measure tran Trans_Delay TRIG V(l_ack) VAL=0.6 RISE=1 TARG V(r_ack) VAL=0.6 RISE=1
+.measure tran Switching_Energy INTEG PAR('ABS(I(V1))*1.2') FROM=17n TO=33n
+simulator lang=spectre

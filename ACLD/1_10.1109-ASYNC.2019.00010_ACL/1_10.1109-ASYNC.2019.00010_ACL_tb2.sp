@@ -5,7 +5,7 @@
 // Design view name: schematic
 simulator lang=spectre
 global 0
-include "/home/yongfu/research-freepdk-library/Cadence45/TECH/GPDK045/gpdk045_v_6_0/gpdk045/../models/spectre/gpdk045.scs" section=mc
+include "../../../input/spectre/gpdk045.scs" section=mc
 
 // Library name: gsclib045u
 // Cell name: DFFX1
@@ -213,7 +213,7 @@ V0 (rstn VSS) vsource type=pulse val0=0 val1=0 period=1 delay=5n \
         rise=100.0p fall=100.0p
 V5 (VSS 0) vsource dc=0 type=dc
 V1 (VDD VSS) vsource dc=vdd type=dc
-I0 (VDD VSS data_in data_out in_ack in_req out_req rstn VDD! VSS!) PDREG
+I0 (VDD VSS data_in data_out in_ack in_req out_req out_ack rstn) PDREG
 simulatorOptions options reltol=1e-3 vabstol=1e-6 iabstol=1e-12 temp=27 \
     tnom=27 scalem=1.0 scale=1.0 gmin=1e-12 rforce=1 maxnotes=5 maxwarns=5 \
     digits=5 cols=80 pivrel=1e-3 sensfile="../psf/sens.output" \
@@ -221,6 +221,7 @@ simulatorOptions options reltol=1e-3 vabstol=1e-6 iabstol=1e-12 temp=27 \
 tran tran stop=200n errpreset=moderate write="spectre.ic" \
     writefinal="spectre.fc" annotate=status maxiters=5 
 finalTimeOP info what=oppoint where=rawfile
+
 dcOp dc write="spectre.dc" maxiters=150 maxsteps=10000 annotate=status
 dcOpInfo info what=oppoint where=rawfile
 modelParameter info what=models where=rawfile
@@ -231,3 +232,10 @@ primitives info what=primitives where=rawfile
 subckts info what=subckts  where=rawfile
 save V1:p 
 saveOptions options save=allpub
+
+parameters vdd=1.2
+
+simulator lang=spice
+.measure dc Static_Power AVG PAR('ABS(I(V1))*1.2') FROM=35n TO=45n
+simulator lang=spectre
+

@@ -5,7 +5,7 @@
 // Design view name: schematic
 simulator lang=spectre
 global 0 VDD! VSS!
-include "/home/yongfu/research-freepdk-library/Cadence45/TECH/GPDK045/gpdk045_v_6_0/gpdk045/../models/spectre/gpdk045.scs" section=mc
+include "../../../input/spectre/gpdk045.scs" section=mc
 
 // Library name: gsclib045u
 // Cell name: INVX1
@@ -42,7 +42,7 @@ ends NAND2X1
 // Library name: GASPCell045
 // Cell name: BUFFX1
 // View name: schematic
-subckt GASPBUFFX1 VDD VSS data_in data_out s0 s1 \
+subckt GASPBUFFX1 VDD VSS data_in data_out s0 s1
     I4 (net1 net07 VDD VSS) gsclib045u_INVX1_schematic
     I5 (s0 net04 VDD VSS) gsclib045u_INVX1_schematic
     I1 (net1 net9 VDD VSS) gsclib045u_INVX1_schematic
@@ -63,7 +63,7 @@ ends GASPBUFFX1
 // Library name: GASPCell045
 // Cell name: tb_GASPBUFFX1
 // View name: schematic
-I0 (VDD VSS data_in data_out s0 s1 VDD! VSS!) GASPBUFFX1
+I0 (VDD VSS data_in data_out s0 s1) GASPBUFFX1
 V5 (VSS 0) vsource dc=0 type=dc
 V1 (VDD VSS) vsource dc=vdd type=dc
 V2 (s0 VSS) vsource type=pulse val0=0 val1=0 period=100n delay=20n \
@@ -86,3 +86,8 @@ designParamVals info what=parameters where=rawfile
 primitives info what=primitives where=rawfile
 subckts info what=subckts  where=rawfile
 saveOptions options save=allpub
+parameters vdd=1.2
+
+simulator lang=spice
+.measure dc Static_Power AVG PAR('ABS(I(V1))*1.2') FROM=35n TO=45n
+simulator lang=spectre

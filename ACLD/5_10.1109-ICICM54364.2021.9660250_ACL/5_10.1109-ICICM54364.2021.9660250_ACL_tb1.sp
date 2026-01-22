@@ -5,7 +5,7 @@
 // Design view name: schematic
 simulator lang=spectre
 global 0 VSS! VDD!
-include "/home/yongfu/research-freepdk-library/Cadence45/TECH/GPDK045/gpdk045_v_6_0/gpdk045/../models/spectre/gpdk045.scs" section=mc
+include "../../../input/spectre/gpdk045.scs" section=mc
 
 // Library name: RTCell045
 // Cell name: RTNOR2X1
@@ -52,3 +52,9 @@ designParamVals info what=parameters where=rawfile
 primitives info what=primitives where=rawfile
 subckts info what=subckts  where=rawfile
 saveOptions options save=allpub
+parameters vdd=1.2
+
+simulator lang=spice
+.measure tran Trans_Delay TRIG V(a) VAL=0.6 RISE=1 TARG V(y) VAL=0.6 RISE=1
+.measure tran Switching_Energy INTEG PAR('ABS(I(V1))*1.2') FROM=17n TO=33n
+simulator lang=spectre

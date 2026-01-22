@@ -8,7 +8,7 @@
 simulator lang=spectre
 global 0
 parameters vdd=1.2
-include "/home/yongfu/research-freepdk-library/Cadence45/TECH/GPDK045/gpdk045_v_6_0/gpdk045/../models/spectre/gpdk045.scs" section=mc
+include "../../../input/spectre/gpdk045.scs" section=mc
 
 // Library name: gsclib045u
 // Cell name: NOR2X1

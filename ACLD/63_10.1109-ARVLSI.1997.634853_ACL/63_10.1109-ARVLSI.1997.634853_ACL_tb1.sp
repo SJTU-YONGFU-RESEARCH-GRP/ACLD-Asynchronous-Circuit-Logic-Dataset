@@ -1,3 +1,12 @@
+// Generated for: spectre
+// Generated on: Jul  3 12:14:17 2025
+// Design library name: PCHBCell045
+// Design cell name: testing
+// Design view name: schematic
+simulator lang=spectre
+global 0
+include "../../../input/spectre/gpdk045.scs" section=mc
+
 // Library name: gsclib045u
 // Cell name: INVX1
 // View name: schematic
@@ -163,3 +172,9 @@ designParamVals info what=parameters where=rawfile
 primitives info what=primitives where=rawfile
 subckts info what=subckts  where=rawfile
 saveOptions options save=allpub
+parameters vdd=1.2
+
+simulator lang=spice
+.measure tran Trans_Delay TRIG V(in_ack) VAL=0.6 RISE=1 TARG V(out_ack) VAL=0.6 RISE=1
+.measure tran Switching_Energy INTEG PAR('ABS(I(V1))*1.2') FROM=17n TO=33n
+simulator lang=spectre

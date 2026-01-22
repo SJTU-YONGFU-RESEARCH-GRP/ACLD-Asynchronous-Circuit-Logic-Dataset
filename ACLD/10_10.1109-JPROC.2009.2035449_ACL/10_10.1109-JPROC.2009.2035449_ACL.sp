@@ -5,24 +5,30 @@
 // Design view name: schematic
 simulator lang=spectre
 global 0
-include "/home/yongfu/research-freepdk-library/Cadence45/TECH/GPDK045/gpdk045_v_6_0/gpdk045/../models/spectre/gpdk045.scs" section=mc
+include "../../../input/spectre/gpdk045.scs" section=mc
 
 // Library name: AscendNCLCell
 // Cell name: NCL1W11OF2X1
 // View name: schematic
-subckt NCL1W11OF2X1 a b q
-    M_i_0 (VSS a Q_neg VSS) g45n1svt w=260.00n l=45n as=1.2013e-14 \
-        ad=1.2013e-14 ps=310.0n pd=310.0n ld=105n ls=105n m=1
-    M_i_1 (Q_neg b VSS VSS) g45n1svt w=260.00n l=45n as=1.2013e-14 \
-        ad=1.2013e-14 ps=310.0n pd=310.0n ld=105n ls=105n m=1
-    M_i_5 (q Q_neg VSS VSS) g45n1svt w=260.00n l=45n as=1.2013e-14 \
-        ad=1.2013e-14 ps=310.0n pd=310.0n ld=105n ls=105n m=1
-    M_i_2 (Q_neg a net_0 VDD) g45p1svt w=390.0n l=45n as=3.125e-14 \
-        ad=3.125e-14 ps=500n pd=500n ld=105n ls=105n m=1
-    M_i_3 (net_0 b VDD VDD) g45p1svt w=390.0n l=45n as=3.125e-14 \
-        ad=3.125e-14 ps=500n pd=500n ld=105n ls=105n m=1
-    M_i_4 (q Q_neg VDD VDD) g45p1svt w=390.00n l=45n as=2.1012e-14 \
-        ad=2.1012e-14 ps=410.0n pd=410.0n ld=105n ls=105n m=1
+subckt NCL1W11OF2X1 a b q VDD VSS
+    M_i_0 (VSS a Q_neg VSS) g45n1svt w=(260n) l=45n nf=1 as=36.4f \
+        ad=36.4f ps=800n pd=800n nrd=538.462m nrs=538.462m sa=140n sb=140n \
+        sd=160n sca=144.98299 scb=0.10251 scc=0.01780 m=(1)
+    M_i_1 (Q_neg b VSS VSS) g45n1svt w=(260n) l=45n nf=1 as=36.4f \
+        ad=36.4f ps=800n pd=800n nrd=538.462m nrs=538.462m sa=140n sb=140n \
+        sd=160n sca=144.98299 scb=0.10251 scc=0.01780 m=(1)
+    M_i_5 (q Q_neg VSS VSS) g45n1svt w=(260n) l=45n nf=1 as=36.4f \
+        ad=36.4f ps=800n pd=800n nrd=538.462m nrs=538.462m sa=140n sb=140n \
+        sd=160n sca=144.98299 scb=0.10251 scc=0.01780 m=(1)
+    M_i_2 (Q_neg a net_0 VDD) g45p1svt w=(390n) l=45n nf=1 as=54.6f ad=54.6f \
+        ps=1.06u pd=1.06u nrd=358.974m nrs=358.974m sa=140n sb=140n \
+        sd=160n sca=114.89040 scb=0.09003 scc=0.01377 m=(1)
+    M_i_3 (net_0 b VDD VDD) g45p1svt w=(390n) l=45n nf=1 as=54.6f ad=54.6f \
+        ps=1.06u pd=1.06u nrd=358.974m nrs=358.974m sa=140n sb=140n \
+        sd=160n sca=114.89040 scb=0.09003 scc=0.01377 m=(1)
+    M_i_4 (q Q_neg VDD VDD) g45p1svt w=(390n) l=45n nf=1 as=54.6f ad=54.6f \
+        ps=1.06u pd=1.06u nrd=358.974m nrs=358.974m sa=140n sb=140n \
+        sd=160n sca=114.89040 scb=0.09003 scc=0.01377 m=(1)
 ends NCL1W11OF2X1
 // End of subcircuit definition.
 

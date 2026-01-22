@@ -5,7 +5,7 @@
 // Design view name: schematic
 simulator lang=spectre
 global 0
-include "/home/yongfu/research-freepdk-library/Cadence45/TECH/GPDK045/gpdk045_v_6_0/gpdk045/../models/spectre/gpdk045.scs" section=mc
+include "../../../input/spectre/gpdk045.scs" section=mc
 
 // Library name: gsclib045u
 // Cell name: INVX1
@@ -52,9 +52,9 @@ ends LEDRLATCHX1
 // End of subcircuit definition.
 
 // Library name: LEDRCell045
-// Cell name: tb_LATCHX1
+// Cell name: tb_LEDRLATCHX1
 // View name: schematic
-I3 (VDD VSS c d q qb) LATCHX1
+I3 (VDD VSS c d q qb) LEDRLATCHX1
 V5 (VSS 0) vsource dc=0 type=dc
 V1 (VDD VSS) vsource dc=vdd type=dc
 V4 (c VSS) vsource dc=0 type=pulse val0=0 val1=0 period=50n delay=10n \
@@ -77,3 +77,8 @@ designParamVals info what=parameters where=rawfile
 primitives info what=primitives where=rawfile
 subckts info what=subckts  where=rawfile
 saveOptions options save=allpub
+parameters vdd=1.2
+
+simulator lang=spice
+.measure dc Static_Power AVG PAR('ABS(I(V1))*1.2') FROM=35n TO=45n
+simulator lang=spectre

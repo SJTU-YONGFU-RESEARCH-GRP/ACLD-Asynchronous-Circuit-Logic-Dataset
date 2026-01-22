@@ -5,7 +5,7 @@
 // Design view name: schematic
 simulator lang=spectre
 global 0 VDD! VSS!
-include "/home/yongfu/research-freepdk-library/Cadence45/TECH/GPDK045/gpdk045_v_6_0/gpdk045/../models/spectre/gpdk045.scs" section=mc
+include "../../../input/spectre/gpdk045.scs" section=mc
 
 // Library name: gsclib045u
 // Cell name: AND2X1
@@ -209,7 +209,7 @@ ends XOR2X1
 // Library name: ClickCell045
 // Cell name: MERGE
 // View name: schematic
-subckt MERGE VDD VSS a a_ack a_req a_sel b b_ack b_req b_sel c c_ack \
+subckt MERGE VDD VSS a a_ack a_req a_sel b b_ack b_req b_sel c c_ack
     I15 (b_sel b n4 VDD VSS) AND2X1
     I14 (a_sel a n3 VDD VSS) AND2X1
     I9 (b_sel n n1 VDD VSS) AND2X1
@@ -263,3 +263,9 @@ designParamVals info what=parameters where=rawfile
 primitives info what=primitives where=rawfile
 subckts info what=subckts  where=rawfile
 saveOptions options save=allpub
+parameters vdd=1.2
+
+simulator lang=spice
+.measure tran Trans_Delay TRIG V(a_req) VAL=0.6 RISE=1 TARG V(c_ack) VAL=0.6 RISE=1
+.measure tran Switching_Energy INTEG PAR('ABS(I(V1))*1.2') FROM=17n TO=33n
+simulator lang=spectre

@@ -122,7 +122,7 @@ python --version  # Should be 3.x
 ### Cadence Spectre Setup (for actual simulations)
 ```bash
 # Source Cadence environment (required for Spectre simulations)
-source /eda/env/cadence_yh.sh
+source license.sh
 
 # Verify Spectre is available
 which spectre

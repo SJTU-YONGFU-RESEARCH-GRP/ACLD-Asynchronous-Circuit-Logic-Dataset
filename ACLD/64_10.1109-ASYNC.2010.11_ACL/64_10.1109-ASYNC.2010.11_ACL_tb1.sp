@@ -5,7 +5,7 @@
 // Design view name: schematic
 simulator lang=spectre
 global 0 VDD! VSS!
-include "/home/yongfu/research-freepdk-library/Cadence45/TECH/GPDK045/gpdk045_v_6_0/gpdk045/../models/spectre/gpdk045.scs" section=mc
+include "../../../input/spectre/gpdk045.scs" section=mc
 
 // Library name: gsclib045
 // Cell name: INVX1
@@ -191,7 +191,8 @@ ends NAND3X1
 // Library name: ClickCell045
 // Cell name: REG
 // View name: schematic
-subckt REG VDD VSS data_in data_out in_ack in_req out_req rstn \
+subckt REG VDD VSS data_in data_out in_ack in_req out_req rstn inh_VDD \
+        inh_VSS
     I30 (in_req in_reqn VDD VSS) INVX1
     I27 (net010 n1 VDD VSS) INVX1
     I25 (net06 n2 VDD VSS) INVX1
@@ -200,7 +201,7 @@ subckt REG VDD VSS data_in data_out in_ack in_req out_req rstn \
     I29 (out_req out_reqn VDD VSS) INVX1
     I21 (click net05 out_req net011 VDD VSS) DFFX1
     I2 (click data_in data_out net3 VDD VSS) DFFX1
-    I31 (n1 n2 click VDD VSS) OR2X1
+    I31 (n1 n2 click inh_VDD inh_VSS) OR2X1
     I19 (net020 rstn net05 VDD VSS) AND2X1
     I32 (in_reqn in_ack out_req net010 VDD VSS) NAND3X1
     I33 (in_req in_ackn out_reqn net06 VDD VSS) NAND3X1
@@ -237,3 +238,9 @@ designParamVals info what=parameters where=rawfile
 primitives info what=primitives where=rawfile
 subckts info what=subckts  where=rawfile
 saveOptions options save=allpub
+parameters vdd=1.2
+
+simulator lang=spice
+.measure tran Trans_Delay TRIG V(in_req) VAL=0.6 RISE=1 TARG V(out_req) VAL=0.6 RISE=1
+.measure tran Switching_Energy INTEG PAR('ABS(I(V1))*1.2') FROM=17n TO=33n
+simulator lang=spectre

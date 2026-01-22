@@ -5,22 +5,21 @@
 // Design view name: schematic
 simulator lang=spectre
 global 0 VSS! VDD!
-include "/home/yongfu/research-freepdk-library/Cadence45/TECH/GPDK045/gpdk045_v_6_0/gpdk045/../models/spectre/gpdk045.scs" section=mc
+include "../../../input/spectre/gpdk045.scs" section=mc
 
 // Library name: RTCell045
 // Cell name: RTINVX1
 // View name: schematic
-subckt RTINVX1
- a y VDD VSS
-    mp0 (y a VDD VDD) g45p1svt w=(390n) l=45n nf=1 as=54.6f \
+subckt RTINVX1 A Y inh_VDD inh_VSS
+    mp0 (Y A inh_VDD inh_VDD) g45p1svt w=(390n) l=45n nf=1 as=54.6f \
         ad=54.6f ps=1.06u pd=1.06u nrd=358.974m nrs=358.974m sa=140n \
         sb=140n sd=160n sca=114.89040 scb=0.09003 scc=0.01377 m=(1)
-    mn0 (y a VSS VSS) g45n1svt w=(260n) l=45n nf=1 as=36.4f \
+    mn0 (Y A inh_VSS inh_VSS) g45n1svt w=(260n) l=45n nf=1 as=36.4f \
         ad=36.4f ps=800n pd=800n nrd=538.462m nrs=538.462m sa=140n sb=140n \
         sd=160n sca=144.98299 scb=0.10251 scc=0.01780 m=(1)
 ends RTINVX1
-
 // End of subcircuit definition.
+
 
 // Library name: RTCell045
 // Cell name: tb_RTINV
@@ -46,3 +45,8 @@ designParamVals info what=parameters where=rawfile
 primitives info what=primitives where=rawfile
 subckts info what=subckts  where=rawfile
 saveOptions options save=allpub
+parameters vdd=1.2
+
+simulator lang=spice
+.measure dc Static_Power AVG PAR('ABS(I(V1))*1.2') FROM=35n TO=45n
+simulator lang=spectre

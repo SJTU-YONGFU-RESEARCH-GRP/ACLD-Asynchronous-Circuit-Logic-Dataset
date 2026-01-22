@@ -5,7 +5,7 @@
 // Design view name: schematic
 simulator lang=spectre
 global 0 VDD! VSS!
-include "/home/yongfu/research-freepdk-library/Cadence45/TECH/GPDK045/gpdk045_v_6_0/gpdk045/../models/spectre/gpdk045.scs" section=mc
+include "../../../input/spectre/gpdk045.scs" section=mc
 
 // Library name: gsclib045u
 // Cell name: INVX1
@@ -42,7 +42,7 @@ ends NAND2X1
 // Library name: GASPCell045
 // Cell name: BUFFX1
 // View name: schematic
-subckt GASPBUFFX1 VDD VSS data_in data_out s0 s1 \
+subckt GASPBUFFX1 VDD VSS data_in data_out s0 s1
     I4 (net1 net07 VDD VSS) gsclib045u_INVX1_schematic
     I5 (s0 net04 VDD VSS) gsclib045u_INVX1_schematic
     I1 (net1 net9 VDD VSS) gsclib045u_INVX1_schematic
@@ -62,7 +62,7 @@ ends GASPBUFFX1
 // Library name: GASPCell045
 // Cell name: testing
 // View name: schematic
-I0 (VDD VSS data_in data_out s0 s1 VDD! VSS!) GASPBUFFX1
+I0 (VDD VSS data_in data_out s0 s1) GASPBUFFX1
 simulatorOptions options reltol=1e-3 vabstol=1e-6 iabstol=1e-12 temp=27 \
     tnom=27 scalem=1.0 scale=1.0 gmin=1e-12 rforce=1 maxnotes=5 maxwarns=5 \
     digits=5 cols=80 pivrel=1e-3 sensfile="../psf/sens.output" \

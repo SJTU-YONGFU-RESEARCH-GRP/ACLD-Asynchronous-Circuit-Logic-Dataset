@@ -5,20 +5,24 @@
 // Design view name: schematic
 simulator lang=spectre
 global 0
-include "/home/yongfu/research-freepdk-library/Cadence45/TECH/GPDK045/gpdk045_v_6_0/gpdk045/../models/spectre/gpdk045.scs" section=mc
+include "../../../input/spectre/gpdk045.scs" section=mc
 
 // Library name: AscendNCLCell
 // Cell name: NCL1W1OF1X1
 // View name: schematic
-subckt NCL1W1OF1X1 a q vDD VSS
-    MPI0 (VDD a PREQ VDD) g45p1svt w=390.00n l=45n as=9.45e-15 ad=9.45e-15 \
-        ps=300n pd=300n ld=105n ls=105n m=1
-    MPO0 (VDD PREQ q VDD) g45p1svt w=390.00n l=45n as=9.45e-15 ad=9.45e-15 \
-        ps=300n pd=300n ld=105n ls=105n m=1
-    MNI0 (PREQ a VSS VSS) NMOS_VTL w=260.00n l=45n as=9.45e-15 ad=9.45e-15 \
-        ps=300n pd=300n ld=105n ls=105n m=1
-    MNO0 (q PREQ VSS VSS) NMOS_VTL w=260.00n l=45n as=9.45e-15 ad=9.45e-15 \
-        ps=300n pd=300n ld=105n ls=105n m=1
+subckt NCL1W1OF1X1 a q VDD VSS
+    MPI0 (VDD a PREQ VDD) g45p1svt w=(390n) l=45n nf=1 as=54.6f ad=54.6f \
+        ps=1.06u pd=1.06u nrd=358.974m nrs=358.974m sa=140n sb=140n \
+        sd=160n sca=114.89040 scb=0.09003 scc=0.01377 m=(1)
+    MPO0 (VDD PREQ q VDD) g45p1svt w=(390n) l=45n nf=1 as=54.6f ad=54.6f \
+        ps=1.06u pd=1.06u nrd=358.974m nrs=358.974m sa=140n sb=140n \
+        sd=160n sca=114.89040 scb=0.09003 scc=0.01377 m=(1)
+    MNI0 (PREQ a VSS VSS) g45n1svt w=(260n) l=45n nf=1 as=36.4f \
+        ad=36.4f ps=800n pd=800n nrd=538.462m nrs=538.462m sa=140n sb=140n \
+        sd=160n sca=144.98299 scb=0.10251 scc=0.01780 m=(1)
+    MNO0 (q PREQ VSS VSS) g45n1svt w=(260n) l=45n nf=1 as=36.4f \
+        ad=36.4f ps=800n pd=800n nrd=538.462m nrs=538.462m sa=140n sb=140n \
+        sd=160n sca=144.98299 scb=0.10251 scc=0.01780 m=(1)
 ends NCL1W1OF1X1
 // End of subcircuit definition.
 

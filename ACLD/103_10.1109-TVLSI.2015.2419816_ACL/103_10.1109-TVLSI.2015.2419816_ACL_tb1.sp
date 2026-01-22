@@ -5,7 +5,7 @@
 // Design view name: schematic
 simulator lang=spectre
 global 0
-include "/home/yongfu/research-freepdk-library/Cadence45/TECH/GPDK045/gpdk045_v_6_0/gpdk045/../models/spectre/gpdk045.scs" section=mc
+include "../../../input/spectre/gpdk045.scs" section=mc
 
 // Library name: gsclib045u
 // Cell name: INVX1
@@ -40,15 +40,6 @@ subckt CELEMENTX1 A B C VDD VSS
         sd=160n sca=114.89040 scb=0.09003 scc=0.01377 m=(1)
 ends CELEMENTX1
 // End of subcircuit definition.
-
-// Generated for: spectre
-// Generated on: Jul 15 10:58:23 2025
-// Design library name: SCLCell045
-// Design cell name: testing
-// Design view name: schematic
-simulator lang=spectre
-global 0
-include "/home/yongfu/research-freepdk-library/Cadence45/TECH/GPDK045/gpdk045_v_6_0/gpdk045/../models/spectre/gpdk045.scs" section=mc
 
 // Library name: SCLCell045
 // Cell name: TH23X1
@@ -129,3 +120,9 @@ designParamVals info what=parameters where=rawfile
 primitives info what=primitives where=rawfile
 subckts info what=subckts  where=rawfile
 saveOptions options save=allpub
+parameters vdd=1.2
+
+simulator lang=spice
+.measure tran Trans_Delay TRIG V(a) VAL=0.6 RISE=1 TARG V(q) VAL=0.6 RISE=1
+.measure tran Switching_Energy INTEG PAR('ABS(I(V1))*1.2') FROM=17n TO=33n
+simulator lang=spectre

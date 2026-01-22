@@ -5,7 +5,7 @@
 // Design view name: schematic
 simulator lang=spectre
 global 0
-include "/home/yongfu/research-freepdk-library/Cadence45/TECH/GPDK045/gpdk045_v_6_0/gpdk045/../models/spectre/gpdk045.scs" section=mc
+include "../../../input/spectre/gpdk045.scs" section=mc
 
 // Library name: gsclib045
 // Cell name: INVX1
@@ -201,6 +201,33 @@ subckt AOX1 af at bf bt cf ct l_ack qf qt rst R_ack VDD VDDL VSS naf nat nbf \
     I4 (qf qt VDD VDDV VSS nqf nqt) CsubBUFFX1
 ends AOX1
 // End of subcircuit definition.
+
+// Library name: gsclib045u
+// Cell name: OR2X1
+// View name: schematic
+subckt OR2X1 A B Y inh_VDD inh_VSS
+    mn2 (Y n0 inh_VSS inh_VSS) g45n1svt w=(260n) l=45n nf=1 as=36.4f \
+        ad=36.4f ps=800n pd=800n nrd=538.462m nrs=538.462m sa=140n sb=140n \
+        sd=160n sca=144.98299 scb=0.10251 scc=0.01780 m=(1)
+    mn0 (n0 A inh_VSS inh_VSS) g45n1svt w=(260n) l=45n nf=1 as=36.4f \
+        ad=36.4f ps=800n pd=800n nrd=538.462m nrs=538.462m sa=140n sb=140n \
+        sd=160n sca=144.98299 scb=0.10251 scc=0.01780 m=(1)
+    mn1 (n0 B inh_VSS inh_VSS) g45n1svt w=(260n) l=45n nf=1 as=36.4f \
+        ad=36.4f ps=800n pd=800n nrd=538.462m nrs=538.462m sa=140n sb=140n \
+        sd=160n sca=144.98299 scb=0.10251 scc=0.01780 m=(1)
+    mp1 (n0 B n1 inh_VDD) g45p1svt w=(390n) l=45n nf=1 as=54.6f ad=54.6f \
+        ps=1.06u pd=1.06u nrd=358.974m nrs=358.974m sa=140n sb=140n \
+        sd=160n sca=114.89040 scb=0.09003 scc=0.01377 m=(1)
+    mp2 (Y n0 inh_VDD inh_VDD) g45p1svt w=(390n) l=45n nf=1 as=54.6f \
+        ad=54.6f ps=1.06u pd=1.06u nrd=358.974m nrs=358.974m sa=140n \
+        sb=140n sd=160n sca=114.89040 scb=0.09003 scc=0.01377 m=(1)
+    mp0 (n1 A inh_VDD inh_VDD) g45p1svt w=(390n) l=45n nf=1 as=54.6f \
+        ad=54.6f ps=1.06u pd=1.06u nrd=358.974m nrs=358.974m sa=140n \
+        sb=140n sd=160n sca=114.89040 scb=0.09003 scc=0.01377 m=(1)
+ends OR2X1
+// End of subcircuit definition.
+
+
 // Library name: SAHBCell045
 // Cell name: tb_AOX1
 // View name: schematic
@@ -270,3 +297,9 @@ designParamVals info what=parameters where=rawfile
 primitives info what=primitives where=rawfile
 subckts info what=subckts  where=rawfile
 saveOptions options save=allpub
+parameters vdd=1.2
+
+simulator lang=spice
+.measure tran Trans_Delay TRIG V(l_ack) VAL=0.6 RISE=1 TARG V(r_ack) VAL=0.6 RISE=1
+.measure tran Switching_Energy INTEG PAR('ABS(I(V1))*1.2') FROM=17n TO=33n
+simulator lang=spectre
