@@ -211,4 +211,14 @@ Temporary Items
 
 ### macOS Patch ###
 # iCloud generated files
-*.icloud
+*.icloudsimulation_results/
+*.log
+*.mt0
+*.raw/
+*.ic
+*.fc
+*.dc
+*.ahdlSimDB/
+*.measure
+spectre.out
+spectre.err
