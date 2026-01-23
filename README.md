@@ -92,9 +92,9 @@ For a summary of asynchronous circuit logic, see [Logic.txt](Logic.txt).
 
 ### Dataset Access Script
 
-- **dataset_usage_examples.py**: Comprehensive examples demonstrating how to access and use the ACLD dataset with the ACLDDataset class.
+- **usage_examples.py**: Comprehensive examples demonstrating how to access and use the ACLD dataset with the ACLDDataset class.
   - Features: Dataset access, batch processing, filtering, DataFrame analysis, SPICE simulation
-  - Example: `python Scripts/dataset_usage_examples.py`
+  - Example: `python Scripts/usage_examples.py`
 
 ### Dataset Generation Scripts
 
@@ -102,7 +102,7 @@ For a summary of asynchronous circuit logic, see [Logic.txt](Logic.txt).
 - **genLogicJson.py**: Extracts circuit logic properties from SPICE netlists.
 - **getMetadata.py**: Retrieves publication metadata from IEEE.
 
-> **Note:** Scripts require Python 3.x. The main dataset_usage_examples.py provides interactive examples of all ACLD functionality.
+> **Note:** Scripts require Python 3.x. The main usage_examples.py provides interactive examples of all ACLD functionality.
 
 ---
 
@@ -220,7 +220,7 @@ print("Testbench files available for circuit simulation")
 
 ### 7. Using the ACLDDataset Class
 
-The comprehensive `dataset_usage_examples.py` script provides an interactive ACLDDataset class with methods for:
+The comprehensive `usage_examples.py` script provides an interactive ACLDDataset class with methods for:
 
 ```python
 from usage_examples import ACLDDataset
@@ -245,7 +245,7 @@ For interactive examples demonstrating all ACLDDataset functionality:
 
 ```bash
 # Run the comprehensive script (see Prerequisites section for environment setup)
-python Scripts/dataset_usage_examples.py
+python Scripts/usage_examples.py
 ```
 
 The script automatically provides:
